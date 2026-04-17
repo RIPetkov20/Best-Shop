@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"Dummy build script required for Autocode Compile\"",
-    "ts-compile": "npx tsc"
-
+    "ts-compile": "npx tsc",
+    "compile": "sass src/scss:dist --no-source-map",
+    "start": "http-server src -o",
+    "dev": "sass src/scss:dist --no-source-map && npm run start"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,8 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "http-server": "^14.1.1",
+    "sass": "^1.99.0",
     "typescript": "^6.0.2"
   }
 }
