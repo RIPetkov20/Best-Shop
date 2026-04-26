@@ -1,6 +1,14 @@
+import { loadComponent } from "./utils/loadComponent.js";
+
 // HEADER  –  hamburger, active nav, cart counter
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+  await loadComponent(
+    'header-placeholder',
+    '/src/html/components/header.html'
+  );
+
   initHamburger();
   setActiveNavLink();
   initCartCounter();
