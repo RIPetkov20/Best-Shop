@@ -1,86 +1,420 @@
-@use '../abstracts/mixins' as m;
-@use '../abstracts/variables' as v;
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
-// --------------- Header ----------------
+// ═══════════════════════════════════════════════════════════
+// SITE HEADER  –  sticky, full-width
+// ═══════════════════════════════════════════════════════════
 .site-header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: v.$header-height;
-    background-color: v.$color-white;
-    z-index: 100;
-    border-bottom: 1px solid rgba(v.$color-gray-light, 0.6);
-
-    &.is-scrolled { 
-        box-shadow: v.$shadow-md;
-    }
-
-    &__inner {
-        @include m.container;
-        @include m.flex-between;
-        height: 100%;
-    }
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $color-white;
+  z-index: $z-header;
+  box-shadow: 0 1px 0 $color-border-nav;
 }
 
-// -------------- Social icons ----------------
-
-.header-social {
-    @include m.flex(row, flex-start, center, v.$space-3);
-
-    a {
-        color: v.$color-gray;
-        @include m.transition(color);
-        display: flex;
-    
-
-        svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        &:hover {
-            color: v.$color-primary;
-        }
-    }
-
-    @include m.mobile {
-        display: none;
-    }
+.header__inner {
+  max-width: $header-max-width;
+  margin: 0 auto;
+  padding: 0 $header-padding-x;
 }
 
-// ----------- Logo ----------------
+// TOP ROW  –  three-column flex layout
+.header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0 18px;
+  border-bottom: 1px solid $color-border-nav;
+}
 
-.header-logo {
-    @include m.flex(row, flex-start, center, v.$space-2);
+// Left: social icons
+.header__social {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 0 0 auto;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: $color-black;
     text-decoration: none;
-    font-family: v.$font-heading;
-    font-size: v.$font-size-lg;
-    font-weight: v.$font-weight-bold;
-    letter-spacing: -0.02em;
-    color: v.$color-black;
+    transition: color $transition-fast;
 
-    &__icon {
-        color: v.$color-primary;
-        display: flex;
-        background-color: v.$color-primary;
-        border-radius: v.$radius-sm;
-        padding: v.$space-1;
+    &:hover         { color: $color-primary; }
+    &:focus-visible { @include focus-ring; border-radius: 2px; }
 
-        img {
-            width: 22px;
-            height: 22px;
-            display: block;
-            object-fit: contain;
-        }
+    svg {
+      width: 21px;
+      height: 21px;
+      fill: currentColor;
+      display: block;
     }
-
-    &__text {
-        span { color: v.$color-primary; }
-    }
-
-    @include m.tablet-down {
-        font-size: v.$font-size-base;
-    }
+  }
 }
 
+// Centre: logo
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+  text-decoration: none;
+  color: $color-primary;
+
+  &:focus-visible { @include focus-ring; border-radius: 4px; }
+
+  img {
+    width: 36px;
+    height: 36px;
+    background-color: $color-primary;
+    flex-shrink: 0;
+    border-radius: 6px;
+  }
+
+  span {
+    font-family: $font-primary;
+    font-weight: $font-weight-bold;
+    font-size: clamp(18px, 2vw, 28px);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+}
+
+// Right slot wrapper
+// Contains account+cart on desktop, hamburger on mobile.
+.header__right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+// Account + Cart buttons (desktop)
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__action-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: $color-black;
+  width: 35px;
+  height: 35px;
+  transition: color $transition-fast;
+
+  &:hover         { color: $color-primary; }
+  &:focus-visible { @include focus-ring; border-radius: 4px; }
+
+  svg {
+    width: 26px;
+    height: 26px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.6;
+    display: block;
+  }
+}
+
+// Cart badge
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background: $color-primary;
+  color: $color-white;
+  font-family: $font-primary;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2px;
+  line-height: 1;
+  pointer-events: none;
+
+  &[data-count="0"] { display: none; }
+}
+
+// ─── Hamburger (mobile only, inside .header__right) ───────
+.hamburger {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: none;          // shown only on mobile
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  z-index: $z-header + 1;
+
+  &:focus-visible { @include focus-ring; border-radius: 4px; }
+
+  .hamburger__line { @include hamburger-line; }
+
+  &[aria-expanded="true"] {
+    .hamburger__line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger__line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger__line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+// NAV ROW  –  desktop only
+.header__nav-bar {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3.5vw, 60px);
+  width: 100%;
+  justify-content: center;
+}
+
+.nav__item { position: relative; }
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-nav;
+  line-height: 1;
+  color: $color-black;
+  white-space: nowrap;
+  padding: 4px 0;
+  transition: color $transition-fast;
+
+  &:hover,
+  &.active        { color: $color-primary; }
+  &:focus-visible { @include focus-ring; border-radius: 2px; }
+
+  &.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $color-primary;
+    border-radius: 1px;
+  }
+}
+
+.nav__arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+// MOBILE MENU PANEL  –  slide-in from right
+// Hidden entirely on desktop
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(340px, 88vw);
+  height: 100dvh;
+  background: $color-white;
+  z-index: $z-mobile-menu;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform $transition-normal;
+
+  // Layout as a vertical flex column
+  display: flex;
+  flex-direction: column;
+  padding: 72px 32px 40px;
+  overflow-y: auto;
+
+  &.is-open { transform: translateX(0); }
+}
+
+// Account + Cart
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $color-border-nav;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.mobile-action-link {
+  // Works for both <button> and <a>
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-base;
+  color: $color-black;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+  transition: color $transition-fast;
+
+  &:hover         { color: $color-primary; }
+  &:focus-visible { @include focus-ring; border-radius: 4px; }
+
+  svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.6;
+    flex-shrink: 0;
+    display: block;
+  }
+}
+
+// Nav links
+.mobile-nav__list {
+  list-style: none;
+  margin: 0 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.mobile-nav__item {
+  border-bottom: 1px solid $color-border-nav;
+}
+
+.mobile-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  padding: 18px 0;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-nav;
+  color: $color-black;
+  transition: color $transition-fast;
+
+  &:hover,
+  &.active { color: $color-primary; }
+}
+
+// Social icons
+.mobile-social {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 32px;
+  flex-shrink: 0;
+
+  a {
+    display: flex;
+    color: $color-black;
+    text-decoration: none;
+    transition: color $transition-fast;
+    &:hover { color: $color-primary; }
+
+    svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      display: block;
+    }
+  }
+}
+
+// Dark overlay
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: $z-overlay;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-normal;
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// BREAKPOINTS
+
+// Tablet
+@include tablet {
+  .header__top       { padding: 22px 0 16px; }
+  .header__logo span { font-size: 22px; }
+  .nav__list         { gap: clamp(16px, 2.5vw, 40px); }
+  .nav__link         { font-size: 16px; }
+}
+
+// Mobile
+@include mobile {
+  // Top row: tighter padding, no bottom divider
+  .header__top {
+    padding: 16px 0;
+    border-bottom: none;
+  }
+
+  // Logo: left-aligned
+  .header__logo {
+    justify-content: flex-start;
+    gap: 8px;
+    flex: 1;
+
+    span { font-size: 18px; }
+    svg  { width: 28px; height: 28px; }
+  }
+
+  // Hide social from header
+  .header__social  { display: none; }
+
+  // Hide account/cart from header
+  .header__actions { display: none; }
+
+  // Show hamburger
+  .hamburger { display: flex; }
+
+  // Hide entire nav row (nothing left to show there on mobile)
+  .header__nav-bar { display: none; }
+}
+
+// Removes mobile UI elements completely
+@media (min-width: 769px) {
+  .mobile-menu    { display: none !important; }
+  .mobile-overlay { display: none !important; }
+}

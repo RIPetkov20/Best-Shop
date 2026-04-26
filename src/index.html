@@ -1,106 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Best Shop</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Shop - Travel Luggage</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
-    
-        <link rel="stylesheet" href="../dist/main.css">
-    </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
-    <body>
-        <header class="site-header" role="banner">
-            <div class="site-header__inner">
+  <link rel="stylesheet" href="../../dist/main.css" />
+</head>
+<body>
 
-                 <!-- Social icons -->
-                <div class="header-social" aria-label="Social media links">
-                    <a href="#" aria-label="Facebook">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                        </svg>
-                    </a>
+  <header class="site-header" role="banner">
+    <div class="header__inner">
 
-                    <a href="#" aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                        </svg>
-                    </a>
+      <!-- TOP ROW -->
+      <div class="header__top">
 
-                    <a href="#" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                </div>
+        <!-- Social icons – visible on desktop only -->
+        <div class="header__social" aria-label="Social media">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+            </svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
 
-                <!-- Logo -->
-                <a href="index.html" class="header-logo" aria-label="Best Shop - go to homepage">
-                    <span class="header-logo__icon" aria-hidden="true">
-                        <img src="assets/images/logo-icon.png" alt="logo">
-                    </span>
+          </a>
+        </div>
 
-                    <span class="header-logo__text"><span>BEST</span> SHOP</span>
-                </a>
+        <!-- Logo – always visible -->
+        <a href="/src/index.html" class="header__logo" aria-label="Best Shop – homepage">
+          <img src="assets/images/logo-icon.png" alt="logo">
+          <span>BEST SHOP</span>
+        </a>
 
-                <!-- Navigation bar -->
-                <nav class="nav" aria-label="Main navigation">
-                    <ul class="nav__list" role="list">
-                        <li><a href="index.html" class="nav__link is-active">Home</a></li>
-                        <li class="nav__item__dropdown">
-                            <a href="html/catalog.html" class="nav_link nav__dropdown-trigger">Catalog
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                            </a>
-                            <div class="nav__dropdown">
-                                <a href="html/catalog.html">Suitcases</a>
-                                <a href="html/catalog.html">Kids' Luggage</a>
-                                <a href="html/catalog.html">Luggage Sets</a>
-                                <a href="html/catalog.html">Carry-Ons</a>
-                            </div>
-                        </li>
-                        <li><a href="html/about.html" class="nav__link">About Us</a></li>
-                        <li><a href="html/contact.html" class="nav__link">Contact Us</a></li>
-                    </ul>
-                </nav>
+        <!-- Right slot: account+cart on desktop, hamburger on mobile -->
+        <div class="header__right">
 
-                <!-- Account and cart icons + hamburger-->
-                <div class="header-actions">
-                    <button id="account-btn" class="header-actions__btn" aria-label="Log in to your account">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
-                    </button>
+          <!-- Account + Cart – desktop only -->
+          <div class="header__actions">
+            <button class="header__action-btn js-account-btn" type="button" aria-label="Account / Log in">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </button>
 
-                    <a href="html/cart.html" class="header-actions__btn" aria-label="Shopping cart">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M7 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-                        </svg>
-                        <span class="cart-count" aria-live="polite" aria-label="Cart items count" style="display:none">0</span>
-                    </a>
+            <button class="header__action-btn js-cart-btn" type="button" aria-label="Open cart"
+                    onclick="window.location.href='/src/html/cart.html'">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="9" cy="21" r="1"/>
+                <circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+              <span class="cart-count" aria-live="polite" data-count="0">0</span>
+            </button>
+          </div>
 
-                    <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
+          <!-- Hamburger – mobile only, same row as logo -->
+          <button class="hamburger" type="button"
+                  aria-label="Open navigation menu"
+                  aria-expanded="false"
+                  aria-controls="mobile-menu">
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+            <span class="hamburger__line" aria-hidden="true"></span>
+          </button>
 
-            </div>
+        </div>
+      </div>
 
-        </header>
+      <!-- NAV ROW – desktop only -->
+      <nav class="header__nav-bar" aria-label="Main navigation">
+        <ul class="nav__list" role="list">
+          <li class="nav__item">
+            <a href="/src/index.html" class="nav__link" data-page="home">Home</a>
+          </li>
+          <li class="nav__item">
+            <a href="/src/html/catalog.html" class="nav__link" data-page="catalog">
+              Catalog<span class="nav__arrow" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="nav__item">
+            <a href="/src/html/about.html" class="nav__link" data-page="about">About Us</a>
+          </li>
+          <li class="nav__item">
+            <a href="/src/html/contact.html" class="nav__link" data-page="contact">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
 
-        
-        <footer>
-
-        </footer>
-    
+    </div>
+  </header>
 
 
-    </body>
+  <!--MOBILE MENU PANEL  (slide-in from right)
+       Hidden on desktop via CSS. -->
+  <div id="mobile-menu" class="mobile-menu"
+       role="dialog" aria-modal="true" aria-label="Navigation menu"
+       aria-hidden="true">
 
-    
+    <!-- Account + Cart -->
+    <div class="mobile-actions">
+      <button class="mobile-action-link js-account-btn" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Account
+      </button>
+
+      <a class="mobile-action-link" href="/src/html/cart.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="9" cy="21" r="1"/>
+          <circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        Cart
+        <span class="cart-count" aria-live="polite" data-count="0">0</span>
+      </a>
+    </div>
+
+    <!-- ② Nav links -->
+    <ul class="mobile-nav__list" role="list">
+      <li class="mobile-nav__item">
+        <a href="/src/index.html" class="mobile-nav__link" data-page="home">Home</a>
+      </li>
+      <li class="mobile-nav__item">
+        <a href="/src/html/catalog.html" class="mobile-nav__link" data-page="catalog">
+          Catalog<span class="nav__arrow" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="mobile-nav__item">
+        <a href="/src/html/about.html" class="mobile-nav__link" data-page="about">About Us</a>
+      </li>
+      <li class="mobile-nav__item">
+        <a href="/src/html/contact.html" class="mobile-nav__link" data-page="contact">Contact Us</a>
+      </li>
+    </ul>
+
+    <!-- ③ Social icons -->
+    <div class="mobile-social" aria-label="Social media">
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+        </svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+
+      </a>
+    </div>
+
+  </div>
+
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <!-- PAGE CONTENT -->
+  <main id="main-content">
+
+  </main>
+
+  <script type="module" src="../../dist/js/main.js"></script>
+</body>
 </html>

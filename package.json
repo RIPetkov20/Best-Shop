@@ -8,7 +8,7 @@
     "build": "echo \"Dummy build script required for Autocode Compile\"",
     "ts-compile": "npx tsc",
     "compile": "sass src/scss:dist --no-source-map",
-    "start": "http-server . -o /src/index.html",
+    "start": "browser-sync start --server --startPath /src/index.html --files \"dist/*.css, dist/js/*.js, src/**/*.html\"",
     "dev": "concurrently \"sass src/scss:dist --no-source-map --watch\" \"npx tsc --watch\" \"npm run start\""
   },
   "repository": {
@@ -20,6 +20,7 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "browser-sync": "^3.0.4",
     "concurrently": "^9.2.1",
     "http-server": "^14.1.1",
     "sass": "^1.99.0",

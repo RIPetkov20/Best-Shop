@@ -1,1 +1,25 @@
+//Abstracts
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+// Base
+@use 'base/reset';
+@use 'base/fonts';
+
+// Components
+@use 'components/buttons';
+@use 'components/forms';
+@use 'components/product-card';
+
+// Layouts
 @use 'layouts/header';
+@use 'layouts/footer';
+
+// Pages
+@use 'pages/about';
+@use 'pages/cart';
+@use 'pages/catalog';
+@use 'pages/product-details';
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');

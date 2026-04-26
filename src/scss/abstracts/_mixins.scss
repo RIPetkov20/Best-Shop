@@ -1,51 +1,96 @@
-@use 'variables' as v;
+@use 'variables' as *;
 
-// ------------- Responsive breakpoints -----------
-
+// Responsive breakpoints
 @mixin mobile {
-    @media (min-width: #{v.$bp-mobile - 1px}) { @content; }
+  @media (max-width: #{$bp-mobile - 1px}) {
+    @content;
+  }
 }
 
-@mixin tablet-down {
-    @media (max-width: #{v.$bp-tablet -1 px}) { @content; }
+@mixin tablet {
+  @media (max-width: #{$bp-tablet - 1px}) {
+    @content;
+  }
 }
 
 @mixin desktop {
-    @media (min-width: #{v.$bp-tablet}) { @content;}
+  @media (min-width: #{$bp-desktop}) {
+    @content;
+  }
 }
 
-// ------------- Container ------------------------
-
-@mixin container {
-    width: 100%;
-    max-width: v.$container-max;
-    margin-inline: auto;
-    padding-inline: v.$container-padding;
-
-    @include desktop {
-        padding-inline: v.$space-10;
-    }
+@mixin above-tablet {
+  @media (min-width: #{$bp-mobile}) {
+    @content;
+  }
 }
 
-// ------------- Flex helpers ---------------------
-@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
-    display: flex;
-    flex-direction: $direction;
-    justify-content: $justify;
-    align-items: $align;
-    @if $gap != 0 {
-        gap: $gap;
-    }
+@mixin above-mobile {
+  @media (min-width: #{$bp-tablet}) {
+    @content;
+  }
+}
+
+// Flex helpers
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin flex-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-// ------------- Transition -----------------------
+@mixin flex-row($gap: 0) {
+  display: flex;
+  align-items: center;
+  gap: $gap;
+}
 
-@mixin transition ($props: all, $duration: v.$transition-normal){
-    transition: $props $duration;
+// Visually hidden (accessibility)
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Focus ring
+@mixin focus-ring {
+  outline: 2px solid $color-primary;
+  outline-offset: 3px;
+}
+
+// Hamburger line
+@mixin hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: $color-black;
+  border-radius: 2px;
+  transition: transform $transition-normal, opacity $transition-fast;
+}
+
+// Link reset
+@mixin link-reset {
+  text-decoration: none;
+  color: inherit;
+  &:visited { color: inherit; }
+}
+
+// Button reset
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 1;
 }
