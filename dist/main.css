@@ -53,6 +53,52 @@ select {
   font-size: inherit;
 }
 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  padding: 0 28px;
+  height: 60px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid #B92770;
+  outline-offset: 3px;
+}
+.btn--primary {
+  background-color: #B92770;
+  color: #ffffff;
+}
+.btn--primary:hover {
+  background-color: rgb(151.3035714286, 31.8964285714, 91.6);
+}
+.btn--primary:active {
+  background-color: rgb(126.03125, 26.56875, 76.3);
+}
+.btn--secondary {
+  background-color: transparent;
+  color: #B92770;
+  border: 2px solid #B92770;
+}
+.btn--secondary:hover {
+  background-color: #B92770;
+  color: #ffffff;
+}
+.btn--sm {
+  height: 44px;
+  font-size: 16px;
+  padding: 0 20px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -484,5 +530,289 @@ select {
   }
   .mobile-overlay {
     display: none !important;
+  }
+}
+.hero {
+  background-color: rgb(231, 232, 233);
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 5vw, 100px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  min-height: clamp(380px, 55vw, 700px);
+  position: relative;
+}
+
+.hero__content {
+  flex: 0 0 auto;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  z-index: 1;
+  padding: 60px 0;
+  align-self: center;
+}
+.hero__content .btn {
+  align-self: flex-start;
+  width: 174px;
+}
+
+.hero__heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 4vw, 50px);
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: #000000;
+  margin: 0;
+}
+
+.hero__subtitle {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: rgb(80, 78, 74);
+  margin: 0;
+  max-width: 500px;
+}
+
+.hero__image {
+  flex: 0 0 auto;
+  width: clamp(260px, 45vw, 580px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+.hero__image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.hero__image img:hover {
+  transform: scale(1.03);
+}
+
+.promo-cards {
+  width: 100%;
+  padding: 0 clamp(16px, 5vw, 100px);
+  margin-top: -90px;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.promo-cards__grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 494fr 646fr;
+  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  min-height: 566px;
+}
+
+.promo-card--testimonial {
+  background-color: #ffffff;
+  padding: clamp(32px, 4vw, 84px) clamp(24px, 3.5vw, 70px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+}
+
+.promo-card__author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.promo-card__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: rgba(200, 200, 200, 0.4);
+}
+
+.promo-card__author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.promo-card__name {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  color: #000000;
+  margin: 0;
+}
+
+.promo-card__role {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1;
+  color: #000000;
+  margin: 0;
+}
+
+.promo-card__heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.2;
+  color: #000000;
+  margin: 0;
+}
+
+.promo-card__text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgb(80, 78, 74);
+  margin: 0;
+}
+
+.promo-card--discount {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 566px;
+}
+
+.promo-card__bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.promo-card__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.promo-card__discount-content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(24px, 4vw, 60px) clamp(20px, 4vw, 73px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+.promo-card__discount-content .btn {
+  width: 174px;
+  align-self: flex-start;
+}
+
+.promo-card__discount-heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0;
+}
+
+.promo-card__discount-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #ffffff;
+  margin: 0;
+  max-width: 400px;
+}
+
+@media (max-width: 1023px) {
+  .hero__inner {
+    min-height: clamp(320px, 50vw, 560px);
+    gap: 24px;
+  }
+  .hero__content {
+    max-width: 420px;
+    gap: 22px;
+  }
+  .hero__image {
+    width: clamp(220px, 40vw, 460px);
+  }
+  .promo-card--discount {
+    min-height: 420px;
+  }
+}
+@media (max-width: 767px) {
+  .hero__inner {
+    flex-direction: column;
+    align-items: center;
+    min-height: unset;
+    padding-top: 32px;
+    padding-bottom: 0;
+    gap: 0;
+  }
+  .hero__content {
+    max-width: 100%;
+    padding: 32px 0 40px;
+    gap: 20px;
+    text-align: center;
+    align-items: center;
+  }
+  .hero__content .btn {
+    align-self: center;
+  }
+  .btn {
+    align-self: center;
+    width: 174px;
+  }
+  .hero__heading {
+    font-size: clamp(26px, 7vw, 34px);
+  }
+  .hero__subtitle {
+    font-size: 15px;
+  }
+  .hero__image {
+    width: clamp(180px, 65vw, 300px);
+    align-self: center;
+  }
+  .promo-cards {
+    margin-top: 32px;
+    margin-bottom: 40px;
+    padding: 0 16px;
+  }
+  .promo-cards__grid {
+    grid-template-columns: 1fr;
+    box-shadow: 0px 10px 40px 0px rgba(193, 199, 212, 0.702);
+  }
+  .promo-card--testimonial {
+    padding: 32px 24px;
+    gap: 18px;
+  }
+  .promo-card--discount {
+    min-height: 380px;
+  }
+  .promo-card__discount-content {
+    padding: 32px 24px;
   }
 }

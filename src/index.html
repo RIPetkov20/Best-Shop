@@ -17,7 +17,97 @@
   <div id="header-placeholder"></div>
 
   <main id="main-content">
-    <!-- page content -->
+    <!-- Section 1- hero -->
+
+    <section class="hero" aria-label="Hero banner">
+      <div class="hero__inner">
+ 
+        <!-- Left: text content -->
+        <div class="hero__content">
+          <h1 class="hero__heading">
+            Smart Styles for<br>Every Destination
+          </h1>
+          <p class="hero__subtitle">
+            Phasellus risus turpis, pretium sit amet magna non,
+            molestie ultricies enim. Nullam pulvinar felis at metus.
+          </p>
+          <a href="/src/html/catalog.html" class="btn btn--primary">
+            View All Items
+          </a>
+        </div>
+
+        <div class="hero__image">
+          <img
+            src="/src/assets/images/homepage/hero-suitcase.png"
+            alt="A premium travel suitcase"
+            width="766"
+            height="625"
+          />
+        </div>
+ 
+      </div>
+    </section>
+
+    <section class="promo-cards" aria-label="Promotions">
+      <div class="promo-cards__grid">
+        
+        <!-- Left card-->
+        <article class="promo-card--testimonial">
+          <div class="promo-card__author">
+            <img
+              class="promo-card__avatar"
+              src="/src/assets/images/homepage/avatar-lillian.png"
+              alt="Lillian Bennett"
+              width="56"
+              height="56"
+            />
+            <div class="promo-card__author-info">
+              <p class="promo-card__name">Lillian Bennett</p>
+              <p class="promo-card__role">Chief Marketing Officer</p>
+            </div>
+          </div>
+
+          <h2 class="promo-card__heading">
+            Aliquam Faucibus Odionecom.
+          </h2>
+
+           <p class="promo-card__text">
+            Duis vestibulum elit vel neque pharetra vulputate.
+            Quisque scelerisque nisi urna. Duis rutrum non risus in
+            imperdiet. Proin molestie accumsan nulla sit.
+          </p>
+
+          <p class="promo-card__text">
+            Namaki duis vestibulum elit vel neque pharetra vulputate.
+            Quisque scelerisque nisi urna.
+          </p>
+        </article>
+
+        <!-- Right card-->
+        <article class="promo-card--discount">
+          <img
+            class="promo-card__bg-img"
+            src="/src/assets/images/homepage/discount-bg.png"
+            alt=""
+            aria-hidden="true"
+            width="646"
+            height="566"
+          />
+          <div class="promo-card__overlay" aria-hidden="true"></div>
+
+          <div class="promo-card__discount-content">
+            <h2 class="promo-card__discount-heading">25 % Discount</h2>
+            <p class="promo-card__discount-text">
+              Curabitur vulputate arcu odio, ac facilisis diam
+              accumsan ut. Ut imperdiet et leo in vulputate.
+            </p>
+            <button class="btn btn--primary" type="button">
+              Get Discount
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <script type="module" src="../../dist/js/main.js"></script>

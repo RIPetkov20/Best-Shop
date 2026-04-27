@@ -1,0 +1,47 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-nav;
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  padding: 0 28px;
+  height: 60px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color $transition-fast, color $transition-fast;
+ 
+  &:focus-visible { @include focus-ring; }
+
+  // Primary color of the site
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+
+ 
+    &:hover  { background-color: darken(#B92770, 8%); }
+    &:active { background-color: darken(#B92770, 14%); }
+  }
+
+   &--secondary {
+    background-color: transparent;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+ 
+    &:hover { background-color: $color-primary; color: $color-white; }
+  }
+
+  &--sm {
+    height: 44px;
+    font-size: $font-size-base;
+    padding: 0 20px;
+  }
+
+}
