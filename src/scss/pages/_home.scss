@@ -1,9 +1,6 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-$home-content-max: 1300px;
-$home-section-px:  clamp(16px, 5vw, 100px);
-
 // -------------- Hero Section ---------------
 .hero {
   background-color: rgba(231, 232, 233, 1);
@@ -12,9 +9,9 @@ $home-section-px:  clamp(16px, 5vw, 100px);
 }
  
 .hero__inner {
-  max-width: $home-content-max;
+  max-width: $content-max-width;
   margin: 0 auto;
-  padding: 0 $home-section-px;
+  padding: 0 $section-padding-x;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -85,7 +82,7 @@ $home-section-px:  clamp(16px, 5vw, 100px);
 
 .promo-cards {
   width: 100%;
-  padding: 0 $home-section-px;
+  padding: 0 $section-padding-x;
   margin-top: -90px;
   margin-bottom: 80px;
   position: relative;
@@ -93,7 +90,7 @@ $home-section-px:  clamp(16px, 5vw, 100px);
 }
 
 .promo-cards__grid {
-  max-width: $home-content-max;
+  max-width: $content-max-width;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 494fr 646fr;
@@ -244,14 +241,18 @@ $home-section-px:  clamp(16px, 5vw, 100px);
         flex-direction: column;
         align-items: center;
         min-height: unset;
-        padding-top: 32px;
-        padding-bottom: 0;
-        gap: 0;
+        //padding-top: 32px;
+        //padding-bottom: 0;
+        //gap: 0;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        gap: 32px;
     }
 
     .hero__content {
         max-width: 100%;
-        padding: 32px 0 40px;
+        //padding: 32px 0 40px;
+        padding: 0;
         gap: 20px;
         text-align: center;
         align-items: center;
@@ -297,4 +298,213 @@ $home-section-px:  clamp(16px, 5vw, 100px);
     .promo-card__discount-content {
         padding: 32px 24px;
     }
+}
+
+// ----------------- Travel suitcases slider section ------
+
+.travel-suitcases {
+  padding: 80px $section-padding-x;
+  background-color: $color-white;
+}
+
+.travel-suitcases__inner {
+  max-width: $content-max-width;
+  margin: 0 auto;
+}
+
+// ------------- Header of the section ---------------
+
+.travel-suitcases__header {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.travel-suitcases__title {
+  font-family: $font-primary;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  color: $color-black;
+  margin: 0;
+}
+
+.travel-suitcases__subtitle {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 17px;
+  line-height: 1;
+  color: rgba(80, 78, 74, 1);
+  margin: 0;
+}
+
+// --------------------- Slider shell --------------
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+// ---------------- Hides overflow slides ----------
+
+.slider__track-wrapper {
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+
+.slider__track {
+  display: flex;
+  gap: $slider-gap;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.slider__slide {
+  flex: 0 0 calc((100% - #{$slider-gap} * 3) / 4);
+  min-width: 0;
+}
+
+// ------------------- Prev / Next arrow buttons ----------
+
+.slider__btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid $color-black;
+  background: $color-white;
+  color: $color-black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+  transition: background-color $transition-fast, color $transition-fast, border-color $transition-fast;
+  z-index: 2;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
+  }
+
+  &:disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+
+  &:focus-visible { @include focus-ring; }
+}
+
+// -------------- Suitcase card -------------------
+
+.suitcase-card {
+  position: relative;
+  height: $slider-card-height;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover .suitcase-card__img {
+    transform: scale(1.06);
+    filter: brightness(0.85);
+  }
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// --------------- Background image ----------------
+
+.suitcase-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+// ------------- Overlay ------------------
+
+.suitcase-card__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+// ---------------- Text content --------------
+
+.suitcase-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 24px 24px 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.suitcase-card__title {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 19px;
+  line-height: 1;
+  color: $color-white;
+  margin: 0;
+}
+
+.suitcase-card__text {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 17px;
+  line-height: 28px;
+  color: $color-white;
+  margin: 0;
+}
+
+// ---------------- Responsive cards --------------
+
+@include tablet {
+  .travel-suitcases { padding: 60px $section-padding-x; }
+ 
+  .travel-suitcases__title { font-size: 32px; }
+ 
+  .slider__slide {
+    flex: 0 0 calc((100% - #{$slider-gap}) / 2);
+  }
+ 
+  .suitcase-card { height: $slider-card-height-t; }
+}
+
+@include mobile {
+  .travel-suitcases { padding: 48px 16px; }
+ 
+  .travel-suitcases__title    { font-size: 26px; }
+  .travel-suitcases__subtitle { font-size: 15px; }
+ 
+  .slider__slide {
+    flex: 0 0 100%;
+  }
+ 
+  .slider__btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+ 
+  .suitcase-card { height: $slider-card-height-m; }
+ 
+  .suitcase-card__title { font-size: 16px; }
+  .suitcase-card__text  { font-size: 15px; line-height: 22px; }
 }

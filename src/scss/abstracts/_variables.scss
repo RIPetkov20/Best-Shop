@@ -26,6 +26,15 @@ $bp-desktop: 1440px;
 $header-max-width:  1313px;
 $header-padding-x:  clamp(16px, 4vw, 64px);
 
+$content-max-width: 1300px;
+$section-padding-x: clamp(16px, 5vw, 100px);
+
+// Slider
+$slider-card-height:   600px;
+$slider-card-height-t: 440px;
+$slider-card-height-m: 360px;
+$slider-gap:           39px;
+
 // Transitions
 $transition-fast:   0.15s ease;
 $transition-normal: 0.25s ease;
