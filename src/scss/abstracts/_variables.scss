@@ -1,4 +1,4 @@
-// Colors
+// ─── Colors ───────────────────────────────────────────────
 $color-primary:    #B92770;
 $color-black:      #000000;
 $color-white:      #ffffff;
@@ -7,7 +7,7 @@ $color-border-nav: rgba(114, 113, 116, 0.2);
 $color-text:       #000000;
 $color-bg:         #ffffff;
 
-// Typography
+// ─── Typography ───────────────────────────────────────────
 $font-primary:   'Montserrat', sans-serif;
 
 $font-weight-regular: 400;
@@ -17,29 +17,36 @@ $font-size-nav:   18px;
 $font-size-base:  16px;
 $font-size-sm:    14px;
 
-// Breakpoints
+// ─── Breakpoints ──────────────────────────────────────────
 $bp-mobile:  768px;
 $bp-tablet:  1024px;
 $bp-desktop: 1440px;
 
-// Layout
+// ─── Product Card ─────────────────────────────────────────
+$product-card-img-height: 400px;
+$product-card-btn-width:  156px;
+$product-card-btn-height: 40px;
+$product-sale-tag-w:      54px;
+$product-sale-tag-h:      28px;
+
+// ─── Layout ───────────────────────────────────────────────
 $header-max-width:  1313px;
 $header-padding-x:  clamp(16px, 4vw, 64px);
 
 $content-max-width: 1300px;
 $section-padding-x: clamp(16px, 5vw, 100px);
 
-// Slider
+// ─── Slider ───────────────────────────────────────────────
 $slider-card-height:   600px;
-$slider-card-height-t: 440px;
-$slider-card-height-m: 360px;
+$slider-card-height-t: 440px;   // tablet
+$slider-card-height-m: 360px;   // mobile
 $slider-gap:           39px;
 
-// Transitions
+// ─── Transitions ──────────────────────────────────────────
 $transition-fast:   0.15s ease;
 $transition-normal: 0.25s ease;
 
-// Z-index
+// ─── Z-index ──────────────────────────────────────────────
 $z-header:       100;
 $z-mobile-menu:  99;
 $z-overlay:      98;

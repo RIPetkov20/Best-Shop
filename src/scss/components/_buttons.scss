@@ -1,5 +1,6 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
+@use "sass:color";
 
 .btn {
   display: inline-flex;
@@ -26,8 +27,8 @@
     color: $color-white;
 
  
-    &:hover  { background-color: darken(#B92770, 8%); }
-    &:active { background-color: darken(#B92770, 14%); }
+    &:hover  { background-color: color.adjust(#B92770, $lightness: -8%); }
+    &:active { background-color: color.adjust(#B92770, $lightness: -14%); }
   }
 
    &--secondary {

@@ -477,34 +477,237 @@
 
 @include tablet {
   .travel-suitcases { padding: 60px $section-padding-x; }
- 
   .travel-suitcases__title { font-size: 32px; }
- 
+
   .slider__slide {
+    // Keeps two cards per row but allows them to shrink
     flex: 0 0 calc((100% - #{$slider-gap}) / 2);
   }
- 
-  .suitcase-card { height: $slider-card-height-t; }
+
+  .suitcase-card { 
+    height: auto;        // Remove fixed height
+    max-width: 280px;    // Shrinks the physical size of the card
+    margin: 0 auto;      // Centers the smaller card in the slide
+  }
+
+  .suitcase-card__img {
+    position: relative;  // Image now pushes the height of the card
+    width: 100%;
+    height: auto;        // Scales height proportionally to the new smaller width
+    object-fit: initial; // Prevents the image from zooming or cropping
+  }
 }
 
 @include mobile {
   .travel-suitcases { padding: 48px 16px; }
- 
   .travel-suitcases__title    { font-size: 26px; }
   .travel-suitcases__subtitle { font-size: 15px; }
- 
+
   .slider__slide {
-    flex: 0 0 100%;
+    flex: 0 0 100%; 
   }
- 
-  .slider__btn {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
+
+  .suitcase-card { 
+    height: auto;        // Remove fixed height
+    max-width: 240px;    // Makes the card even smaller for mobile screens
+    margin: 0 auto;      // Centers the card
   }
- 
-  .suitcase-card { height: $slider-card-height-m; }
- 
+
+  .suitcase-card__img {
+    position: relative;  // Pulls image out of absolute flow
+    width: 100%;
+    height: auto;
+    object-fit: initial; // Keeps the suitcase looking exactly like the original file
+  }
+
   .suitcase-card__title { font-size: 16px; }
   .suitcase-card__text  { font-size: 15px; line-height: 22px; }
+}
+
+// ----------- SELECTED PRODUCTS SECTION --------------
+.selected-products {
+  padding: 80px $section-padding-x;
+  background-color: $color-white;
+}
+ 
+.selected-products__inner {
+  max-width: $content-max-width;
+  margin: 0 auto;
+}
+
+.selected-products__header {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.selected-products__title {
+  font-family: $font-primary;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  color: $color-black;
+  margin: 0;
+}
+ 
+.selected-products__subtitle {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 17px;
+  line-height: 1;
+  color: rgba(80, 78, 74, 1);
+  margin: 0;
+}
+
+.selected-products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 39px;
+}
+
+@include tablet {
+  .selected-products          { padding: 60px $section-padding-x; }
+  .selected-products__title   { font-size: 32px; }
+  .selected-products__grid    { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
+
+@include mobile {
+  .selected-products          { padding: 48px 16px; }
+  .selected-products__title   { font-size: 26px; }
+  .selected-products__subtitle{ font-size: 15px; }
+  .selected-products__grid    { grid-template-columns: 1fr; gap: 32px; }
+}
+
+// -----------Banner-----------------------
+.promo-banner {
+  width: 100%;
+  padding: 80px $section-padding-x;
+  display: flex;
+  justify-content: center;
+}
+
+.promo-banner__inner {
+  position: relative;
+  width: 100%;
+  max-width: 1300px; // From .txt
+  height: 407px;     // From .txt
+  overflow: hidden;
+  display: flex;
+  align-items: center; // This centers both groups vertically
+  box-shadow: 0px 20px 80px rgba(193, 199, 212, 0.7);
+}
+
+.promo-banner__container {
+  width: 100%;
+  // Standard horizontal padding from edges
+  padding: 0 80px; 
+  display: flex;
+  justify-content: space-between; // Forces the gap into the middle
+  align-items: center;           // Double-ensures vertical balance
+  z-index: 1;
+}
+
+// --- Left Group (Percents + Subtext) ---
+.promo-banner__left-group {
+  width: 497px; // From .txt
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  // This ensures the 25% and its subtext are treated as one centered unit
+  justify-content: center; 
+
+  .promo-banner__percent {
+    font-family: $font-primary;
+    font-weight: 900;
+    font-size: 223px;  // From .txt
+    line-height: 1;    // Critical for vertical alignment
+    margin: 0;
+  }
+
+  .promo-banner__percent-sub {
+    width: 466px;      // From .txt
+    font-size: 20px;   // From .txt
+    line-height: 1;
+    margin: 0;
+    margin-top: -10px; // Fine-tuning to keep it tight to the percentage
+  }
+}
+
+// --- Right Group (Offer Text + Button) ---
+.promo-banner__right-group {
+  width: 417px; // From .txt
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  .promo-banner__offer-title {
+    font-family: $font-primary;
+    font-weight: 900;
+    font-size: 40px;   // From .txt
+    line-height: 1;
+    margin: 0;
+  }
+
+  .promo-banner__offer-text {
+    width: 337px;      // From .txt
+    font-size: 17px;   // From .txt
+    line-height: 1.3;  // From .txt (130%)
+    margin: 0;
+  }
+}
+
+.promo-banner__btn {
+  width: 200px; // From .txt
+  height: 60px; // From .txt
+  background-color: $color-primary; // #B92770
+  color: $color-white;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover { opacity: 0.9; }
+}
+
+// --- Background ---
+.promo-banner__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.promo-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); 
+  z-index: -1;
+}
+
+// --- Responsive Logic ---
+@include tablet {
+  .promo-banner__inner { height: auto; padding: 60px 0; }
+  .promo-banner__container { padding: 0 40px; }
+  .promo-banner__percent { font-size: 160px; }
+}
+
+@include mobile {
+  .promo-banner__container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    .promo-banner__left-group, .promo-banner__right-group { 
+        width: 100%; 
+        align-items: center; 
+    }
+    .promo-banner__percent { font-size: 100px; }
+    .promo-banner__percent-sub { width: 100%; }
+  }
 }

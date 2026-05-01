@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES6",                     
+    "target": "ES2016", 
+    "lib": ["DOM", "ES2016", "DOM.Iterable"],                    
     "module": "ESNext",
     "moduleResolution": "Bundler",              
     "outDir": "./dist/js",                  // Compiled JS files go here
