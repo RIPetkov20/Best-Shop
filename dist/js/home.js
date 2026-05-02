@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initDiscountBtn();
     initTravelSlider();
     void loadSelectedProducts();
+    void loadNewProducts();
     // Sync cart badge on page load
     updateAllCartBadges(getCart().length);
 });
@@ -131,6 +132,75 @@ function buildProductCard(product) {
         <p class="product-card__price">$${product.price}</p>
         <button class="product-card__btn" type="button" aria-label="Add ${product.name} to cart">
           Add To Cart
+        </button>
+      </div>
+    </article>
+  `;
+}
+// ───────────────────────────────────────────────────────────
+// NEW PRODUCTS ARRIVAL  –  load from data.json, render cards
+// ───────────────────────────────────────────────────────────
+function loadNewProducts() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const grid = document.getElementById('new-products-grid');
+        if (!grid)
+            return;
+        grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Loading...</p>';
+        try {
+            const response = yield fetch('assets/data.json');
+            if (!response.ok)
+                throw new Error(`HTTP ${response.status}`);
+            const json = (yield response.json());
+            const newProducts = json.data.filter(p => p.blocks.includes('New Products Arrival'));
+            if (newProducts.length === 0) {
+                grid.innerHTML = '<p style="text-align:center;padding:40px;">No products found.</p>';
+                return;
+            }
+            // "View Product" cards — clicking navigates to product details
+            grid.innerHTML = newProducts.map(p => buildViewProductCard(p)).join('');
+            // Entire card is clickable → product details
+            grid.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const id = card.dataset['productId'];
+                    if (id)
+                        window.location.href = `/src/html/product.html?id=${id}`;
+                });
+            });
+        }
+        catch (err) {
+            console.error('Failed to load new products:', err);
+            grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Could not load products.</p>';
+        }
+    });
+}
+// ─── Product card with "View Product" button ──────────────
+function buildViewProductCard(product) {
+    const badge = product.salesStatus
+        ? `<div class="product-card__badge" aria-label="Sale"><span>SALE</span></div>`
+        : '';
+    const imgSrc = `assets/images/homepage/${product.imageUrl}`;
+    return `
+    <article
+      class="product-card"
+      data-product-id="${product.id}"
+      aria-label="${product.name}"
+      tabindex="0"
+    >
+      <div class="product-card__img-wrap">
+        ${badge}
+        <img
+          class="product-card__img"
+          src="${imgSrc}"
+          alt="${product.name}"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+      </div>
+      <div class="product-card__body">
+        <h3 class="product-card__name">${product.name}</h3>
+        <p class="product-card__price">$${product.price}</p>
+        <button class="product-card__btn" type="button" aria-label="View ${product.name}">
+          View Product
         </button>
       </div>
     </article>

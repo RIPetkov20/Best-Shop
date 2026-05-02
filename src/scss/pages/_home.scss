@@ -584,97 +584,111 @@
 // -----------Banner-----------------------
 .promo-banner {
   width: 100%;
-  padding: 80px $section-padding-x;
+  padding: 80px 0;
   display: flex;
   justify-content: center;
 }
 
 .promo-banner__inner {
   position: relative;
+  // --- STRICT SPECS ---
   width: 100%;
-  max-width: 1300px; // From .txt
-  height: 407px;     // From .txt
+  max-width: 1300px;
+  height: 407px; 
+  // --------------------
   overflow: hidden;
-  display: flex;
-  align-items: center; // This centers both groups vertically
   box-shadow: 0px 20px 80px rgba(193, 199, 212, 0.7);
 }
 
 .promo-banner__container {
+  position: relative;
   width: 100%;
-  // Standard horizontal padding from edges
-  padding: 0 80px; 
-  display: flex;
-  justify-content: space-between; // Forces the gap into the middle
-  align-items: center;           // Double-ensures vertical balance
+  height: 100%;
   z-index: 1;
 }
 
-// --- Left Group (Percents + Subtext) ---
-.promo-banner__left-group {
-  width: 497px; // From .txt
+// --- LEFT BLOCK POSITIONING ---
+// Left 305px - Banner Left 200px = 105px offset
+.promo-banner__left {
+  position: absolute;
+  // This calculates the center of the left section:
+  // (Half of 1300px = 650px). Subtract half the width of the content (497/2 ≈ 248).
+  // 650 - 248 = 402px from the left edge of the 1300px container.
+  left: 105px; // Keeping your Figma '305px' coordinate (305-200)
+  top: 50%;
+  transform: translateY(-50%); 
+  width: 497px;      
   color: $color-white;
   display: flex;
   flex-direction: column;
-  // This ensures the 25% and its subtext are treated as one centered unit
-  justify-content: center; 
+  justify-content: center;
 
   .promo-banner__percent {
     font-family: $font-primary;
     font-weight: 900;
-    font-size: 223px;  // From .txt
-    line-height: 1;    // Critical for vertical alignment
+    font-size: 223px; 
+    line-height: 0.8; // Trims font "air" to ensure true vertical centering
     margin: 0;
+    text-align: left;
   }
 
   .promo-banner__percent-sub {
-    width: 466px;      // From .txt
-    font-size: 20px;   // From .txt
-    line-height: 1;
-    margin: 0;
-    margin-top: -10px; // Fine-tuning to keep it tight to the percentage
+    width: 466px;     
+    font-size: 20px;  
+    margin-top: 10px;
+    padding-left: 20px; // Figma offset
   }
 }
 
-// --- Right Group (Offer Text + Button) ---
-.promo-banner__right-group {
-  width: 417px; // From .txt
+// --- RIGHT BLOCK POSITIONING ---
+// Left 976px - Banner Left 200px = 776px offset
+.promo-banner__right {
+  position: absolute;
+  top: 70px;        // Top 3415px - Banner Top 3345px
+  left: 776px;      
+  width: 417px;     
   color: $color-white;
   display: flex;
   flex-direction: column;
-  gap: 25px;
 
   .promo-banner__offer-title {
-    font-family: $font-primary;
+    font-size: 40px;
     font-weight: 900;
-    font-size: 40px;   // From .txt
-    line-height: 1;
-    margin: 0;
+    line-height: 100%;
+    margin: 0 0 25px 0;
   }
 
   .promo-banner__offer-text {
-    width: 337px;      // From .txt
-    font-size: 17px;   // From .txt
-    line-height: 1.3;  // From .txt (130%)
-    margin: 0;
+    width: 337px;
+    font-size: 17px;
+    line-height: 130%;
+    margin: 0 0 45px 0;
   }
 }
 
 .promo-banner__btn {
-  width: 200px; // From .txt
-  height: 60px; // From .txt
+  width: 200px;      
+  height: 60px;     
   background-color: $color-primary; // #B92770
   color: $color-white;
   border: none;
   font-weight: 700;
   font-size: 18px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s ease; // Smooth transition for hover
+  
+  &:hover {
+    background-color: darken(#B92770, 10%); // Darker pink
+    //transform: translateY(-2px); // Subtle lift
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
 
-  &:hover { opacity: 0.9; }
+  &:active {
+    transform: translateY(0); // Pressed effect
+  }
 }
 
-// --- Background ---
+// Background
 .promo-banner__bg {
   position: absolute;
   inset: 0;
@@ -691,23 +705,280 @@
   z-index: -1;
 }
 
-// --- Responsive Logic ---
 @include tablet {
-  .promo-banner__inner { height: auto; padding: 60px 0; }
-  .promo-banner__container { padding: 0 40px; }
-  .promo-banner__percent { font-size: 160px; }
+  .promo-banner {
+    height: auto; // Allow banner to grow with content
+    padding: 60px 0;
+  }
+
+  .promo-banner__inner {
+    width: 100%; // Fill screen width
+    max-width: 90%; // Add some breathing room
+  }
+
+  .promo-banner__left {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-bottom: 40px;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Center for tablet
+    text-align: center;
+
+    .promo-banner__percent {
+      font-size: 160px; // Scale down from 223px
+    }
+    
+    .promo-banner__percent-sub {
+      width: 100%;
+      padding-left: 0; // Remove the Figma offset for mobile centering
+    }
+  }
+
+  .promo-banner__right {
+    position: static;
+    transform: none;
+    width: 100%;
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+
+    .promo-banner__offer-text {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 30px;
+    }
+  }
+
+  .promo-banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
+// 2. MOBILE (Below 768px)
 @include mobile {
-  .promo-banner__container {
-    flex-direction: column;
-    text-align: center;
-    gap: 40px;
-    .promo-banner__left-group, .promo-banner__right-group { 
-        width: 100%; 
-        align-items: center; 
-    }
-    .promo-banner__percent { font-size: 100px; }
-    .promo-banner__percent-sub { width: 100%; }
+  .promo-banner {
+    padding: 40px 15px;
   }
+
+  .promo-banner__left {
+    .promo-banner__percent {
+      font-size: 100px; // Further scale down
+    }
+    .promo-banner__percent-sub {
+      font-size: 16px;
+    }
+  }
+
+  .promo-banner__right {
+    .promo-banner__offer-title {
+      font-size: 28px;
+    }
+    .promo-banner__btn {
+      width: 100%; // Full width button on small mobile for easier tapping
+      max-width: 280px;
+    }
+  }
+}
+
+// 3. CROSS-BROWSER FIX (Firefox/Safari)
+.promo-banner__bg {
+  // Ensures background covers fully even if height changes
+  min-width: 100%;
+  min-height: 100%;
+}
+
+// --------------- New Products arrival ------------------
+.new-products {
+  padding: 80px $section-padding-x;
+}
+ 
+.new-products__inner {
+  max-width: $content-max-width;
+  margin: 0 auto;
+}
+ 
+.new-products__header {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.new-products__title {
+  font-family: $font-primary;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  color: $color-black;
+  margin: 0;
+}
+ 
+.new-products__subtitle {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 17px;
+  line-height: 1;
+  color: rgba(80, 78, 74, 1);
+  margin: 0;
+}
+ 
+// 4-column grid — same proportions as Selected Products
+.new-products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 39px;
+}
+ 
+// ─── Tablet (≤ 1024px): 2 columns ────────────────────────
+@include tablet {
+  .new-products        { padding: 60px $section-padding-x; }
+  .new-products__title { font-size: 32px; }
+  .new-products__grid  { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
+ 
+// ─── Mobile (≤ 768px): 1 column ──────────────────────────
+@include mobile {
+  .new-products           { padding: 48px 16px; }
+  .new-products__title    { font-size: 26px; }
+  .new-products__subtitle { font-size: 15px; }
+  .new-products__grid     { grid-template-columns: 1fr; gap: 32px; }
+}
+
+// --------------------- Testimonials -----------------
+.testimonials {
+  padding: 80px $section-padding-x;
+  background-color: $color-white;
+}
+ 
+.testimonials__inner {
+  max-width: $content-max-width;
+  margin: 0 auto;
+}
+ 
+// ─── Section header ───────────────────────────────────────
+.testimonials__header {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.testimonials__title {
+  font-family: $font-primary;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  color: $color-black;
+  margin: 0;
+}
+ 
+.testimonials__subtitle {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 17px;
+  line-height: 1;
+  color: rgba(80, 78, 74, 1);
+  margin: 0;
+}
+ 
+// ─── 3-column grid ────────────────────────────────────────
+// Figma: three 420px cards in 1300px container
+// gap: 1300 - (3 × 420) / 2 = 20px each side → ~20px gap
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+ 
+// ─── Single testimonial card ──────────────────────────────
+.testimonial-card {
+  background-color: $color-white;
+  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 44px 40px 44px;
+  gap: 24px;
+  min-height: 336px;
+}
+ 
+// ─── Circular avatar ──────────────────────────────────────
+.testimonial-card__avatar {
+  width: 98px;
+  height: 98px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  // Subtle fallback bg while image loads
+  background-color: rgba(200, 200, 200, 0.3);
+}
+ 
+// ─── Quote text ───────────────────────────────────────────
+.testimonial-card__quote {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 17px;
+  line-height: 1.65;
+  color: $color-black;
+  margin: 0;
+  flex: 1;
+}
+ 
+// ─── Name + location (pink, bold) ─────────────────────────
+.testimonial-card__author {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 17px;
+  line-height: 1;
+  color: $color-primary;
+  margin: 0;
+}
+ 
+// ─── Tablet (≤ 1024px): 2 columns ────────────────────────
+@include tablet {
+  .testimonials         { padding: 60px $section-padding-x; }
+  .testimonials__title  { font-size: 32px; }
+  .testimonials__grid   { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+ 
+  // Third card spans both columns on tablet for balance
+  .testimonial-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+ 
+// ─── Mobile (≤ 768px): 1 column ──────────────────────────
+@include mobile {
+  .testimonials            { padding: 48px 16px; }
+  .testimonials__title     { font-size: 26px; }
+  .testimonials__subtitle  { font-size: 15px; }
+  .testimonials__grid      { grid-template-columns: 1fr; gap: 24px; }
+ 
+  .testimonial-card:last-child {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
+  }
+ 
+  .testimonial-card {
+    padding: 32px 24px;
+    gap: 20px;
+  }
+ 
+  .testimonial-card__avatar { width: 80px; height: 80px; }
+  .testimonial-card__quote  { font-size: 15px; }
+  .testimonial-card__author { font-size: 15px; }
 }

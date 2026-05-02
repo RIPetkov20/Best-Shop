@@ -252,8 +252,9 @@
   // Layout as a vertical flex column
   display: flex;
   flex-direction: column;
-  padding: 72px 32px 40px;
+  padding: 100px 32px 40px;  // extra top gap so account/cart are well below header
   overflow-y: auto;
+  overflow-x: hidden;        // prevent content inside panel from overflowing
 
   &.is-open { transform: translateX(0); }
 }
@@ -286,6 +287,7 @@
   cursor: pointer;
   white-space: nowrap;
   line-height: 1;
+  position: relative;        // anchor for the .cart-count badge
   transition: color $transition-fast;
 
   &:hover         { color: $color-primary; }
@@ -299,6 +301,30 @@
     stroke-width: 1.6;
     flex-shrink: 0;
     display: block;
+  }
+
+  // Cart badge inside mobile panel — same style as desktop but repositioned
+  // to sit on top-right of the svg icon, not the whole link
+  .cart-count {
+    position: absolute;
+    top: -9px;
+    right: -15px;
+    background: $color-primary;
+    color: $color-white;
+    font-family: $font-primary;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    min-width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2px;
+    line-height: 1;
+    pointer-events: none;
+
+    &[data-count="0"] { display: none; }
   }
 }
 

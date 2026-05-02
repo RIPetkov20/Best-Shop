@@ -1,21 +1,47 @@
-import { loadComponent } from "./utils/loadComponent.js";
+// ═══════════════════════════════════════════════════════════
+// MAIN  –  loads header + footer partials, then inits UI
+// ═══════════════════════════════════════════════════════════
 
-// HEADER  –  hamburger, active nav, cart counter
-
-document.addEventListener('DOMContentLoaded', async () => {
-
-  await loadComponent(
-    'header-placeholder',
-    '/src/html/components/header.html'
-  );
-
-  initHamburger();
-  setActiveNavLink();
-  initCartCounter();
-  initAccountModal();
+document.addEventListener('DOMContentLoaded', () => {
+  // Load both partials in parallel, then init all UI features
+  void Promise.all([loadPartial('header'), loadPartial('footer')]).then(() => {
+    initHamburger();
+    setActiveNavLink();
+    initCartCounter();
+    initAccountModal();
+  });
 });
 
+// ───────────────────────────────────────────────────────────
+// PARTIAL LOADER
+// Resolves the correct relative path based on URL depth,
+// fetches the HTML partial, and replaces the placeholder.
+// ───────────────────────────────────────────────────────────
+async function loadPartial(name: 'header' | 'footer'): Promise<void> {
+  const placeholder = document.getElementById(`${name}-placeholder`);
+  if (!placeholder) return;
+
+  try {
+    // Depth: src/index.html = 2 segments → prefix ''
+    //        src/html/page.html = 3 segments → prefix '../'
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    const prefix   = segments.length <= 2 ? '' : '../';
+    const url      = `${prefix}html/components/${name}.html`;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`${name} fetch failed: ${response.status}`);
+
+    const html = await response.text();
+    placeholder.outerHTML = html;
+  } catch (err) {
+    console.error(`Could not load ${name} partial:`, err);
+    placeholder.remove();
+  }
+}
+
+// ───────────────────────────────────────────────────────────
 // HAMBURGER / MOBILE MENU
+// ───────────────────────────────────────────────────────────
 function initHamburger(): void {
   const hamburger  = document.querySelector<HTMLButtonElement>('.hamburger');
   const mobileMenu = document.querySelector<HTMLElement>('#mobile-menu');
@@ -66,7 +92,9 @@ function initHamburger(): void {
   });
 }
 
+// ───────────────────────────────────────────────────────────
 // ACTIVE NAV LINK  (matches current page filename)
+// ───────────────────────────────────────────────────────────
 function setActiveNavLink(): void {
   const filename = window.location.pathname.split('/').pop() || 'index.html';
 
@@ -87,7 +115,9 @@ function setActiveNavLink(): void {
   });
 }
 
+// ───────────────────────────────────────────────────────────
 // CART COUNTER  –  reads from localStorage key "cart"
+// ───────────────────────────────────────────────────────────
 export function updateCartCounter(): void {
   const stored = localStorage.getItem('cart');
   const cart: unknown[] = stored ? (JSON.parse(stored) as unknown[]) : [];
@@ -106,7 +136,9 @@ function initCartCounter(): void {
   });
 }
 
-// ACCOUNT MODAL
+// ───────────────────────────────────────────────────────────
+// ACCOUNT MODAL  –  dispatches event for modal module
+// ───────────────────────────────────────────────────────────
 function initAccountModal(): void {
   document.querySelectorAll<HTMLElement>('.js-account-btn').forEach(btn => {
     btn.addEventListener('click', () => {

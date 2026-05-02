@@ -9,13 +9,21 @@ $color-bg:         #ffffff;
 
 // ─── Typography ───────────────────────────────────────────
 $font-primary:   'Montserrat', sans-serif;
+$font-secondary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $font-weight-regular: 400;
+$font-weight-medium:  500;
 $font-weight-bold:    700;
 
 $font-size-nav:   18px;
 $font-size-base:  16px;
-$font-size-sm:    14px;
+$font-size-sm:    15px;
+$font-size-xs:    14px;
+
+// ─── Footer ───────────────────────────────────────────────
+$footer-benefits-bg:  rgba(80, 78, 74, 1);
+$footer-main-bg:      $color-white;
+$footer-copyright-bg: rgba(0, 0, 0, 0.06);
 
 // ─── Breakpoints ──────────────────────────────────────────
 $bp-mobile:  768px;
