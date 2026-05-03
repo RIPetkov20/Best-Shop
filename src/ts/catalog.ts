@@ -12,7 +12,6 @@ const PAGE_SIZE   = 12;
 
 const activeFilters: Record<string, string> = {};
 let   sortValue   = 'default';
-let   filtersVisible = false;
 
 // ═══════════════════════════════════════════════════════════
 // INIT

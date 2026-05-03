@@ -49,7 +49,7 @@
     svg {
       width: 21px;
       height: 21px;
-      fill: currentColor;
+      fill: currentcolor;
       display: block;
     }
   }
@@ -120,7 +120,7 @@
   svg {
     width: 26px;
     height: 26px;
-    stroke: currentColor;
+    stroke: currentcolor;
     fill: none;
     stroke-width: 1.6;
     display: block;
@@ -230,7 +230,7 @@
   height: 0;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 5px solid currentColor;
+  border-top: 5px solid currentcolor;
   margin-top: 2px;
   flex-shrink: 0;
 }
@@ -245,7 +245,7 @@
   height: 100dvh;
   background: $color-white;
   z-index: $z-mobile-menu;
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  box-shadow: -4px 0 24px rgb(0 0 0 / 12%);
   transform: translateX(100%);
   transition: transform $transition-normal;
 
@@ -253,8 +253,7 @@
   display: flex;
   flex-direction: column;
   padding: 100px 32px 40px;  // extra top gap so account/cart are well below header
-  overflow-y: auto;
-  overflow-x: hidden;        // prevent content inside panel from overflowing
+  overflow: hidden auto;        // prevent content inside panel from overflowing
 
   &.is-open { transform: translateX(0); }
 }
@@ -296,7 +295,7 @@
   svg {
     width: 22px;
     height: 22px;
-    stroke: currentColor;
+    stroke: currentcolor;
     fill: none;
     stroke-width: 1.6;
     flex-shrink: 0;
@@ -376,7 +375,7 @@
     svg {
       width: 22px;
       height: 22px;
-      fill: currentColor;
+      fill: currentcolor;
       display: block;
     }
   }
@@ -386,7 +385,7 @@
 .mobile-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgb(0 0 0 / 45%);
   z-index: $z-overlay;
   opacity: 0;
   pointer-events: none;
@@ -440,7 +439,7 @@
 }
 
 // Removes mobile UI elements completely
-@media (min-width: 769px) {
+@media (width >= 769px) {
   .mobile-menu    { display: none !important; }
   .mobile-overlay { display: none !important; }
 }

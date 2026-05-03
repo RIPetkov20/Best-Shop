@@ -6,17 +6,17 @@
 // ═══════════════════════════════════════════════════════════
 
 // ── Local tokens from Figma spec
-$modal-border-color:  rgba(185, 39, 112, 1);
-$modal-text-muted:    rgba(114, 113, 116, 1);
-$modal-field-border:  rgba(185, 39, 112, 1);
-$modal-width:         480px;
-$modal-height:        384px;
+$modal-border-color: rgb(185 39 112 / 100%);
+$modal-text-muted: rgb(114 113 116 / 100%);
+$modal-field-border: rgb(185 39 112 / 100%);
+$modal-width: 480px;
+$modal-height: 384px;
 
 // ── Backdrop
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 55%);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -64,6 +64,7 @@ $modal-height:        384px;
 // ── Close button (top-right ×)
 .login-modal__close {
   @include button-reset;
+
   position: absolute;
   top: 14px;
   right: 18px;
@@ -150,13 +151,14 @@ $modal-height:        384px;
   // Error state
   &.is-error {
     border-color: #dc3545;
-    border: 3px solid rgba(255, 0, 0, 0.5);
+    border: 3px solid rgb(255 0 0 / 50%);
   }
 }
 
 // ── Eye toggle button
 .login-form__eye-btn {
   @include button-reset;
+
   position: absolute;
   right: 12px;
   top: 50%;
@@ -173,7 +175,7 @@ $modal-height:        384px;
     width: 18px;
     height: 14px;
     fill: none;
-    stroke: currentColor;
+    stroke: currentcolor;
     stroke-width: 1.6;
   }
 
@@ -279,7 +281,7 @@ $modal-height:        384px;
   transition: background $transition-fast;
 
   &:hover {
-    background: rgba(155, 30, 93, 1);
+    background: rgb(155 30 93 / 100%);
   }
 
   &:focus-visible {

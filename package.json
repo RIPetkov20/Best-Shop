@@ -12,20 +12,20 @@
     "dev": "concurrently \"sass src/scss:dist --no-source-map --watch\" \"npx tsc --watch\" \"npm run start\"",
     "lint": "npm run lint:ts && npm run lint:scss",
     "lint:ts": "eslint \"src/**/*.ts\"",
-    "lint:scss": "stylelint \"src/**/*.scss\""
+    "lint:ts:fix": "eslint \"src/**/*.ts\" --fix",
+    "lint:scss": "stylelint \"src/**/*.scss\"",
+    "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix"
   },
   "repository": {
     "type": "git",
     "url": ""
   },
   "keywords": [],
-  "author": "",
+  "author": "Rumen Petkov",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.59.1",
-    "@typescript-eslint/parser": "^8.59.1",
     "browser-sync": "^3.0.4",
     "concurrently": "^9.2.1",
     "eslint": "^10.3.0",

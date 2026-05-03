@@ -38,6 +38,7 @@
   height: auto;
   opacity: 0.15;
   display: block;
+
   // Each wave's `top` is set inline in the HTML per Figma offsets
 }
 
@@ -112,6 +113,7 @@
   max-width: $content-max-width;
   margin: 0 auto;
   display: grid;
+
   // Left ~65% for links + shipping | Right ~35% for contact
   grid-template-columns: 1fr 373px;
   gap: 80px;
@@ -271,11 +273,11 @@
 }
 
 .footer-copyright__text {
-  font-family: 'Inter', $font-secondary;
+  font-family: Inter, $font-secondary;
   font-weight: $font-weight-regular;
   font-size: $font-size-xs;   // 14px
   line-height: 1;
-  color: rgba(0, 0, 0, 0.35);
+  color: rgb(0 0 0 / 35%);
   margin: 0;
 }
 
@@ -311,6 +313,7 @@
     height: auto;
     opacity: 0.15;
     display: block;
+
     // Each wave's `top` is set inline in the HTML per Figma offsets
     }
 
@@ -351,8 +354,10 @@
     height: auto;
     opacity: 0.15;
     display: block;
+
     // Each wave's `top` is set inline in the HTML per Figma offsets
     }
+
   // Contact row: stack
   .footer-contact__row {
     grid-template-columns: 1fr;

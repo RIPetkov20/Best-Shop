@@ -3,7 +3,7 @@
 
 // -------------- Hero Section ---------------
 .hero {
-  background-color: rgba(231, 232, 233, 1);
+  background-color: rgb(231 232 233 / 100%);
   width: 100%;
   overflow: hidden;
 }
@@ -53,7 +53,7 @@
   font-weight: $font-weight-regular;
   font-size: clamp(15px, 1.2vw, 17px);
   line-height: 1.6;
-  color: rgba(80, 78, 74, 1);
+  color: rgb(80 78 74 / 100%);
   margin: 0;
   max-width: 500px;
 }
@@ -94,7 +94,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 494fr 646fr;
-  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  box-shadow: 0 20px 80px 0 rgb(193 199 212 / 70.2%);
   min-height: 566px;
 }
 
@@ -119,7 +119,7 @@
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  background-color: rgba(200, 200, 200, 0.4);
+  background-color: rgb(200 200 200 / 40%);
 }
 
 .promo-card__author-info {
@@ -161,7 +161,7 @@
   font-weight: $font-weight-regular;
   font-size: 17px;
   line-height: 1.65;
-  color: rgba(80, 78, 74, 1);
+  color: rgb(80 78 74 / 100%);
   margin: 0;
 }
 
@@ -186,7 +186,7 @@
 .promo-card__overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgb(0 0 0 / 40%);
   z-index: 1;
 }
 
@@ -241,9 +241,10 @@
         flex-direction: column;
         align-items: center;
         min-height: unset;
-        //padding-top: 32px;
-        //padding-bottom: 0;
-        //gap: 0;
+
+        // padding-top: 32px;
+        // padding-bottom: 0;
+        // gap: 0;
         padding-top: 40px;
         padding-bottom: 40px;
         gap: 32px;
@@ -251,7 +252,8 @@
 
     .hero__content {
         max-width: 100%;
-        //padding: 32px 0 40px;
+
+        // padding: 32px 0 40px;
         padding: 0;
         gap: 20px;
         text-align: center;
@@ -283,7 +285,7 @@
  
     .promo-cards__grid {
         grid-template-columns: 1fr;
-        box-shadow: 0px 10px 40px 0px rgba(193, 199, 212, 0.702);
+        box-shadow: 0 10px 40px 0 rgb(193 199 212 / 70.2%);
     }
 
      .promo-card--testimonial {
@@ -337,7 +339,7 @@
   font-weight: $font-weight-regular;
   font-size: 17px;
   line-height: 1;
-  color: rgba(80, 78, 74, 1);
+  color: rgb(80 78 74 / 100%);
   margin: 0;
 }
 
@@ -416,7 +418,7 @@
   }
 
   &:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 12px 40px rgb(0 0 0 / 25%);
   }
 }
 
@@ -437,7 +439,7 @@
 .suitcase-card__overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgb(0 0 0 / 40%);
   z-index: 1;
 }
 
@@ -449,7 +451,7 @@
   left: 0;
   right: 0;
   z-index: 2;
-  padding: 24px 24px 32px 24px;
+  padding: 24px 24px 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -558,7 +560,7 @@
   font-weight: $font-weight-regular;
   font-size: 17px;
   line-height: 1;
-  color: rgba(80, 78, 74, 1);
+  color: rgb(80 78 74 / 100%);
   margin: 0;
 }
 
@@ -591,13 +593,15 @@
 
 .promo-banner__inner {
   position: relative;
+
   // --- STRICT SPECS ---
   width: 100%;
   max-width: 1300px;
   height: 407px; 
+
   // --------------------
   overflow: hidden;
-  box-shadow: 0px 20px 80px rgba(193, 199, 212, 0.7);
+  box-shadow: 0 20px 80px rgb(193 199 212 / 70%);
 }
 
 .promo-banner__container {
@@ -611,6 +615,7 @@
 // Left 305px - Banner Left 200px = 105px offset
 .promo-banner__left {
   position: absolute;
+
   // This calculates the center of the left section:
   // (Half of 1300px = 650px). Subtract half the width of the content (497/2 ≈ 248).
   // 650 - 248 = 402px from the left edge of the 1300px container.
@@ -655,14 +660,14 @@
     font-size: 40px;
     font-weight: 900;
     line-height: 100%;
-    margin: 0 0 25px 0;
+    margin: 0 0 25px;
   }
 
   .promo-banner__offer-text {
     width: 337px;
     font-size: 17px;
     line-height: 130%;
-    margin: 0 0 45px 0;
+    margin: 0 0 45px;
   }
 }
 
@@ -679,8 +684,8 @@
   
   &:hover {
     background-color: darken(#B92770, 10%); // Darker pink
-    //transform: translateY(-2px); // Subtle lift
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    // transform: translateY(-2px); // Subtle lift
+    box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
   }
 
   &:active {
@@ -701,7 +706,7 @@
 .promo-banner__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4); 
+  background: rgb(0 0 0 / 40%); 
   z-index: -1;
 }
 
@@ -769,6 +774,7 @@
     .promo-banner__percent {
       font-size: 100px; // Further scale down
     }
+
     .promo-banner__percent-sub {
       font-size: 16px;
     }
@@ -778,6 +784,7 @@
     .promo-banner__offer-title {
       font-size: 28px;
     }
+
     .promo-banner__btn {
       width: 100%; // Full width button on small mobile for easier tapping
       max-width: 280px;
@@ -825,7 +832,7 @@
   font-weight: $font-weight-regular;
   font-size: 17px;
   line-height: 1;
-  color: rgba(80, 78, 74, 1);
+  color: rgb(80 78 74 / 100%);
   margin: 0;
 }
  
@@ -886,7 +893,7 @@
   font-weight: $font-weight-regular;
   font-size: 17px;
   line-height: 1;
-  color: rgba(80, 78, 74, 1);
+  color: rgb(80 78 74 / 100%);
   margin: 0;
 }
  
@@ -902,12 +909,12 @@
 // ─── Single testimonial card ──────────────────────────────
 .testimonial-card {
   background-color: $color-white;
-  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  box-shadow: 0 20px 80px 0 rgb(193 199 212 / 70.2%);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 44px 40px 44px;
+  padding: 44px 40px;
   gap: 24px;
   min-height: 336px;
 }
@@ -920,8 +927,9 @@
   object-fit: cover;
   flex-shrink: 0;
   display: block;
+
   // Subtle fallback bg while image loads
-  background-color: rgba(200, 200, 200, 0.3);
+  background-color: rgb(200 200 200 / 30%);
 }
  
 // ─── Quote text ───────────────────────────────────────────

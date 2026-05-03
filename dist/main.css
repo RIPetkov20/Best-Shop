@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
 *,
 *::before,
 *::after {
@@ -11,14 +11,14 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
-  color: #000000;
-  background-color: #ffffff;
+  color: #000;
+  background-color: #fff;
   line-height: 1.5;
   min-height: 100dvh;
   overflow-x: hidden;
@@ -76,7 +76,7 @@ select {
 }
 .btn--primary {
   background-color: #B92770;
-  color: #ffffff;
+  color: #fff;
 }
 .btn--primary:hover {
   background-color: rgb(151.3035714286, 31.8964285714, 91.6);
@@ -91,7 +91,7 @@ select {
 }
 .btn--secondary:hover {
   background-color: #B92770;
-  color: #ffffff;
+  color: #fff;
 }
 .btn--sm {
   height: 44px;
@@ -116,7 +116,7 @@ select {
   height: 400px;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  box-shadow: 0 20px 80px 0 rgba(193, 199, 212, 0.702);
 }
 
 .product-card__badge {
@@ -136,7 +136,7 @@ select {
   font-weight: 700;
   font-size: 12px;
   line-height: 1;
-  color: #ffffff;
+  color: #fff;
   letter-spacing: 0;
 }
 
@@ -163,7 +163,7 @@ select {
   font-weight: 700;
   font-size: 19px;
   line-height: 1.2;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -180,7 +180,7 @@ select {
   width: 156px;
   height: 40px;
   background-color: #B92770;
-  color: #ffffff;
+  color: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
@@ -206,7 +206,7 @@ select {
 @media (max-width: 1023px) {
   .product-card__img-wrap {
     height: auto;
-    box-shadow: 0px 10px 40px rgba(193, 199, 212, 0.5);
+    box-shadow: 0 10px 40px rgba(193, 199, 212, 0.5);
   }
   .product-card__img {
     width: 100%;
@@ -270,7 +270,7 @@ select {
   position: relative;
   width: 480px;
   max-width: 100%;
-  background: #ffffff;
+  background: #fff;
   padding: 44px 70px 40px;
   box-sizing: border-box;
   animation: modal-scale-in 0.22s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
@@ -328,7 +328,7 @@ select {
   font-weight: 400;
   font-size: 14px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin-bottom: 8px;
   display: flex;
   align-items: center;
@@ -349,13 +349,13 @@ select {
   width: 100%;
   height: 40px;
   border: 2px solid rgba(185, 39, 112, 0.5);
-  background: #ffffff;
+  background: #fff;
   padding: 0 14px;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 14px;
-  color: #000000;
+  color: #000;
   transition: border-color 0.15s ease;
 }
 .login-form__input::placeholder {
@@ -396,7 +396,7 @@ select {
   width: 18px;
   height: 14px;
   fill: none;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-width: 1.6;
 }
 .login-form__eye-btn:hover {
@@ -440,7 +440,7 @@ select {
   height: 16px;
   flex-shrink: 0;
   border: 2px solid rgb(114, 113, 116);
-  background: #ffffff;
+  background: #fff;
   cursor: pointer;
   accent-color: #B92770;
   opacity: 0.5;
@@ -485,7 +485,7 @@ select {
   width: 100%;
   height: 40px;
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
   border: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
@@ -528,7 +528,7 @@ select {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #fff;
   z-index: 100;
   box-shadow: 0 1px 0 rgba(114, 113, 116, 0.2);
 }
@@ -556,7 +556,7 @@ select {
 .header__social a {
   display: flex;
   align-items: center;
-  color: #000000;
+  color: #000;
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -571,7 +571,7 @@ select {
 .header__social a svg {
   width: 21px;
   height: 21px;
-  fill: currentColor;
+  fill: currentcolor;
   display: block;
 }
 
@@ -626,7 +626,7 @@ select {
   align-items: center;
   justify-content: center;
   position: relative;
-  color: #000000;
+  color: #000;
   width: 35px;
   height: 35px;
   transition: color 0.15s ease;
@@ -642,7 +642,7 @@ select {
 .header__action-btn svg {
   width: 26px;
   height: 26px;
-  stroke: currentColor;
+  stroke: currentcolor;
   fill: none;
   stroke-width: 1.6;
   display: block;
@@ -653,7 +653,7 @@ select {
   top: -4px;
   right: -6px;
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
   font-family: "Montserrat", sans-serif;
   font-size: 10px;
   font-weight: 700;
@@ -692,7 +692,7 @@ select {
   display: block;
   width: 24px;
   height: 2px;
-  background-color: #000000;
+  background-color: #000;
   border-radius: 2px;
   transition: transform 0.25s ease, opacity 0.15s ease;
 }
@@ -737,7 +737,7 @@ select {
   font-weight: 700;
   font-size: 18px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   white-space: nowrap;
   padding: 4px 0;
   transition: color 0.15s ease;
@@ -767,7 +767,7 @@ select {
   height: 0;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 5px solid currentColor;
+  border-top: 5px solid currentcolor;
   margin-top: 2px;
   flex-shrink: 0;
 }
@@ -778,7 +778,7 @@ select {
   right: 0;
   width: min(340px, 88vw);
   height: 100dvh;
-  background: #ffffff;
+  background: #fff;
   z-index: 99;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
   transform: translateX(100%);
@@ -786,8 +786,7 @@ select {
   display: flex;
   flex-direction: column;
   padding: 100px 32px 40px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden auto;
 }
 .mobile-menu.is-open {
   transform: translateX(0);
@@ -810,7 +809,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 16px;
-  color: #000000;
+  color: #000;
   text-decoration: none;
   background: none;
   border: none;
@@ -833,7 +832,7 @@ select {
 .mobile-action-link svg {
   width: 22px;
   height: 22px;
-  stroke: currentColor;
+  stroke: currentcolor;
   fill: none;
   stroke-width: 1.6;
   flex-shrink: 0;
@@ -844,7 +843,7 @@ select {
   top: -9px;
   right: -15px;
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
   font-family: "Montserrat", sans-serif;
   font-size: 10px;
   font-weight: 700;
@@ -884,7 +883,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 18px;
-  color: #000000;
+  color: #000;
   transition: color 0.15s ease;
 }
 .mobile-nav__link:hover, .mobile-nav__link.active {
@@ -900,7 +899,7 @@ select {
 }
 .mobile-social a {
   display: flex;
-  color: #000000;
+  color: #000;
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -910,7 +909,7 @@ select {
 .mobile-social a svg {
   width: 22px;
   height: 22px;
-  fill: currentColor;
+  fill: currentcolor;
   display: block;
 }
 
@@ -972,7 +971,7 @@ select {
     display: none;
   }
 }
-@media (min-width: 769px) {
+@media (width >= 769px) {
   .mobile-menu {
     display: none !important;
   }
@@ -1019,11 +1018,11 @@ select {
 }
 
 .footer-benefits__title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 19px;
   line-height: 1;
-  color: #ffffff;
+  color: #fff;
   margin: 0 0 24px;
 }
 
@@ -1055,16 +1054,16 @@ select {
 }
 
 .benefit-item__line {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 500;
   font-size: 15px;
   line-height: 1.3;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
 }
 
 .footer-main {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 60px clamp(16px, 5vw, 100px) 40px;
 }
 
@@ -1097,11 +1096,11 @@ select {
 }
 
 .footer-links__title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 15px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -1115,11 +1114,11 @@ select {
 }
 
 .footer-links__item a {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 400;
   font-size: 15px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -1133,20 +1132,20 @@ select {
 }
 
 .footer-shipping__title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 15px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0 0 26px;
 }
 
 .footer-shipping__text {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.65;
-  color: #000000;
+  color: #000;
   margin: 0;
   max-width: 639px;
 }
@@ -1158,20 +1157,20 @@ select {
 }
 
 .footer-contact__title {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 15px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0 0 26px;
 }
 
 .footer-contact__desc {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.65;
-  color: #000000;
+  color: #000;
   margin: 0 0 40px;
 }
 
@@ -1208,22 +1207,22 @@ select {
 }
 
 .footer-contact__text {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 400;
   font-size: 15px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
 .footer-copyright {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 20px clamp(16px, 5vw, 100px);
   text-align: center;
 }
 
 .footer-copyright__text {
-  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Inter, "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 1;
@@ -1339,7 +1338,7 @@ select {
   font-size: clamp(30px, 4vw, 50px);
   line-height: 1.1;
   letter-spacing: 0;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -1386,12 +1385,12 @@ select {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 494fr 646fr;
-  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  box-shadow: 0 20px 80px 0 rgba(193, 199, 212, 0.702);
   min-height: 566px;
 }
 
 .promo-card--testimonial {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: clamp(32px, 4vw, 84px) clamp(24px, 3.5vw, 70px);
   display: flex;
   flex-direction: column;
@@ -1425,7 +1424,7 @@ select {
   font-weight: 700;
   font-size: 20px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -1434,7 +1433,7 @@ select {
   font-weight: 400;
   font-size: 17px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -1443,7 +1442,7 @@ select {
   font-weight: 700;
   font-size: clamp(20px, 2.2vw, 28px);
   line-height: 1.2;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -1501,7 +1500,7 @@ select {
   font-weight: 900;
   font-size: clamp(28px, 3vw, 40px);
   line-height: 1.1;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
 }
 
@@ -1510,7 +1509,7 @@ select {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.6;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
   max-width: 400px;
 }
@@ -1571,7 +1570,7 @@ select {
   }
   .promo-cards__grid {
     grid-template-columns: 1fr;
-    box-shadow: 0px 10px 40px 0px rgba(193, 199, 212, 0.702);
+    box-shadow: 0 10px 40px 0 rgba(193, 199, 212, 0.702);
   }
   .promo-card--testimonial {
     padding: 32px 24px;
@@ -1586,7 +1585,7 @@ select {
 }
 .travel-suitcases {
   padding: 80px clamp(16px, 5vw, 100px);
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .travel-suitcases__inner {
@@ -1608,7 +1607,7 @@ select {
   font-weight: 900;
   font-size: 40px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -1651,9 +1650,9 @@ select {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 2px solid #000000;
-  background: #ffffff;
-  color: #000000;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1666,7 +1665,7 @@ select {
 .slider__btn:hover:not(:disabled) {
   background-color: #B92770;
   border-color: #B92770;
-  color: #ffffff;
+  color: #fff;
 }
 .slider__btn:disabled {
   opacity: 0.25;
@@ -1714,7 +1713,7 @@ select {
   left: 0;
   right: 0;
   z-index: 2;
-  padding: 24px 24px 32px 24px;
+  padding: 24px 24px 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1725,7 +1724,7 @@ select {
   font-weight: 700;
   font-size: 19px;
   line-height: 1;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
 }
 
@@ -1734,7 +1733,7 @@ select {
   font-weight: 400;
   font-size: 17px;
   line-height: 28px;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
 }
 
@@ -1794,7 +1793,7 @@ select {
 }
 .selected-products {
   padding: 80px clamp(16px, 5vw, 100px);
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .selected-products__inner {
@@ -1816,7 +1815,7 @@ select {
   font-weight: 900;
   font-size: 40px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -1875,7 +1874,7 @@ select {
   max-width: 1300px;
   height: 407px;
   overflow: hidden;
-  box-shadow: 0px 20px 80px rgba(193, 199, 212, 0.7);
+  box-shadow: 0 20px 80px rgba(193, 199, 212, 0.7);
 }
 
 .promo-banner__container {
@@ -1891,7 +1890,7 @@ select {
   top: 50%;
   transform: translateY(-50%);
   width: 497px;
-  color: #ffffff;
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1916,7 +1915,7 @@ select {
   top: 70px;
   left: 776px;
   width: 417px;
-  color: #ffffff;
+  color: #fff;
   display: flex;
   flex-direction: column;
 }
@@ -1924,20 +1923,20 @@ select {
   font-size: 40px;
   font-weight: 900;
   line-height: 100%;
-  margin: 0 0 25px 0;
+  margin: 0 0 25px;
 }
 .promo-banner__right .promo-banner__offer-text {
   width: 337px;
   font-size: 17px;
   line-height: 130%;
-  margin: 0 0 45px 0;
+  margin: 0 0 45px;
 }
 
 .promo-banner__btn {
   width: 200px;
   height: 60px;
   background-color: #B92770;
-  color: #ffffff;
+  color: #fff;
   border: none;
   font-weight: 700;
   font-size: 18px;
@@ -2060,7 +2059,7 @@ select {
   font-weight: 900;
   font-size: 40px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -2108,7 +2107,7 @@ select {
 }
 .testimonials {
   padding: 80px clamp(16px, 5vw, 100px);
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .testimonials__inner {
@@ -2130,7 +2129,7 @@ select {
   font-weight: 900;
   font-size: 40px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -2150,13 +2149,13 @@ select {
 }
 
 .testimonial-card {
-  background-color: #ffffff;
-  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  background-color: #fff;
+  box-shadow: 0 20px 80px 0 rgba(193, 199, 212, 0.702);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 44px 40px 44px;
+  padding: 44px 40px;
   gap: 24px;
   min-height: 336px;
 }
@@ -2176,7 +2175,7 @@ select {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.65;
-  color: #000000;
+  color: #000;
   margin: 0;
   flex: 1;
 }
@@ -2243,7 +2242,7 @@ select {
   }
 }
 .info-page {
-  background: #ffffff;
+  background: #fff;
   width: 100%;
   overflow-x: hidden;
 }
@@ -2259,7 +2258,7 @@ select {
   justify-content: center;
   text-align: center;
   position: relative;
-  color: #ffffff;
+  color: #fff;
   overflow: hidden;
 }
 .info-hero__bg {
@@ -2274,10 +2273,7 @@ select {
 .info-hero::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.35);
   z-index: 2;
 }
@@ -2287,7 +2283,7 @@ select {
   padding: 0 20px;
 }
 .info-hero__title {
-  font-family: "Montserrat", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-weight: 700;
   font-size: 50px;
   line-height: 1.2;
@@ -2295,7 +2291,7 @@ select {
   text-transform: uppercase;
 }
 .info-hero__subtitle {
-  font-family: "Montserrat", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.4;
@@ -2357,7 +2353,7 @@ select {
   object-fit: contain;
 }
 .info-card__title {
-  font-family: "Montserrat", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
@@ -2365,7 +2361,7 @@ select {
   margin-bottom: 20px;
 }
 .info-card__text {
-  font-family: "Montserrat", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-weight: 400;
   font-size: 17px;
   line-height: 1.4;
@@ -2405,13 +2401,13 @@ select {
   font-weight: 700;
   font-size: 50px;
   line-height: 1;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
 }
 
 .cart-content {
   padding: 40px 0 80px;
-  background: #ffffff;
+  background: #fff;
 }
 
 .cart-content__inner {
@@ -2439,11 +2435,11 @@ select {
 }
 
 .cart-table__col {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 1;
-  color: #ffffff;
+  color: #fff;
 }
 .cart-table__col--image {
   text-align: left;
@@ -2488,11 +2484,11 @@ select {
 }
 
 .cart-row__name {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 1.3;
-  color: #000000;
+  color: #000;
 }
 
 .cart-row__price,
@@ -2500,7 +2496,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #000000;
+  color: #000;
   text-align: center;
 }
 
@@ -2518,7 +2514,7 @@ select {
   font-weight: 700;
   font-size: 34px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   cursor: pointer;
   width: 24px;
   text-align: center;
@@ -2533,7 +2529,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 25px;
-  color: #000000;
+  color: #000;
   min-width: 24px;
   text-align: center;
   user-select: none;
@@ -2576,7 +2572,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 20px;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 .cart-empty__text a,
@@ -2607,7 +2603,7 @@ select {
   width: 224px;
   height: 60px;
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -2648,7 +2644,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #ffffff;
+  color: #fff;
 }
 .cart-summary__label--total {
   font-size: 20px;
@@ -2658,7 +2654,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #ffffff;
+  color: #fff;
 }
 .cart-summary__value--total {
   font-size: 20px;
@@ -2681,7 +2677,7 @@ select {
   width: 229px;
   height: 42px;
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 18px;
@@ -2762,7 +2758,7 @@ select {
 }
 .catalog-page {
   padding: 40px 0 80px;
-  background: #ffffff;
+  background: #fff;
 }
 
 .catalog-page__inner {
@@ -2818,7 +2814,7 @@ select {
   height: 40px;
   padding: 0 16px;
   border: 2px solid rgb(233, 233, 237);
-  background: #ffffff;
+  background: #fff;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   color: rgb(80, 78, 74);
@@ -2829,7 +2825,7 @@ select {
 .catalog-filters-toggle svg {
   width: 8px;
   height: 4px;
-  stroke: currentColor;
+  stroke: currentcolor;
   transition: transform 0.15s ease;
 }
 .catalog-filters-toggle:hover {
@@ -2859,7 +2855,7 @@ select {
   width: 202px;
   padding: 0 36px 0 14px;
   border: 2px solid rgb(233, 233, 237);
-  background: #ffffff;
+  background: #fff;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   color: rgb(80, 78, 74);
@@ -2886,7 +2882,7 @@ select {
   width: 100%;
   max-width: 341px;
   position: relative;
-  background: #ffffff;
+  background: #fff;
 }
 
 .catalog-search__input {
@@ -2958,7 +2954,7 @@ select {
 }
 
 .catalog-filter-panel__body {
-  background: #ffffff;
+  background: #fff;
 }
 .catalog-filter-panel__body[hidden] {
   display: none;
@@ -2968,7 +2964,7 @@ select {
   display: flex;
   align-items: flex-start;
   gap: 26px;
-  padding: 23px 8px 16px 8px;
+  padding: 23px 8px 16px;
   flex-wrap: nowrap;
   overflow-x: auto;
 }
@@ -3012,7 +3008,7 @@ select {
   height: 40px;
   padding: 0 32px 0 15px;
   border: 2px solid rgb(233, 233, 237);
-  background: #ffffff;
+  background: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 13px;
@@ -3030,7 +3026,7 @@ select {
   border-color: #B92770;
 }
 .catalog-filter-select option:not([value=""]) {
-  color: #000000;
+  color: #000;
 }
 
 .catalog-filter-group--sales {
@@ -3049,7 +3045,7 @@ select {
   width: 12px;
   height: 12px;
   cursor: pointer;
-  accent-color: #000000;
+  accent-color: #000;
   flex-shrink: 0;
 }
 
@@ -3065,7 +3061,7 @@ select {
   width: 224px;
   height: 60px;
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -3124,11 +3120,11 @@ select {
   height: 40px;
   padding: 0 16px;
   border: 2px solid #B92770;
-  background: #ffffff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #fff;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 11px;
-  color: #000000;
+  color: #000;
   cursor: pointer;
   letter-spacing: 0.04em;
   transition: background-color 0.15s ease, color 0.15s ease;
@@ -3136,11 +3132,11 @@ select {
 .catalog-pagination__btn svg {
   width: 8px;
   height: 4px;
-  stroke: currentColor;
+  stroke: currentcolor;
 }
 .catalog-pagination__btn:hover:not(:disabled) {
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
 }
 .catalog-pagination__btn:disabled {
   opacity: 0.4;
@@ -3162,10 +3158,10 @@ select {
   justify-content: center;
   border: none;
   background: transparent;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 500;
   font-size: 15px;
-  color: #000000;
+  color: #000;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
@@ -3175,7 +3171,7 @@ select {
 }
 .catalog-pagination__page.is-active {
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
 }
 
 .catalog-sidebar {
@@ -3196,7 +3192,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #000000;
+  color: #000;
   margin: 0 0 24px;
 }
 
@@ -3220,8 +3216,8 @@ select {
   width: 87px;
   height: 87px;
   flex-shrink: 0;
-  background: #ffffff;
-  box-shadow: 0px 7px 15px 0px rgba(193, 199, 212, 0.4);
+  background: #fff;
+  box-shadow: 0 7px 15px 0 rgba(193, 199, 212, 0.4);
   overflow: hidden;
 }
 
@@ -3244,7 +3240,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
   line-height: 1.35;
-  color: #000000;
+  color: #000;
   margin: 0;
   transition: color 0.15s ease;
 }
@@ -3261,7 +3257,7 @@ select {
 .best-set__price {
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -3279,7 +3275,7 @@ select {
 }
 
 .catalog-popup__box {
-  background: #ffffff;
+  background: #fff;
   padding: 32px 40px;
   display: flex;
   align-items: center;
@@ -3292,7 +3288,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 16px;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -3381,7 +3377,7 @@ select {
 }
 .product-page {
   padding: 40px 0 80px;
-  background: #ffffff;
+  background: #fff;
 }
 
 .product-page__inner {
@@ -3460,7 +3456,7 @@ select {
   font-weight: 700;
   font-size: clamp(22px, 2.5vw, 30px);
   line-height: 1.2;
-  color: #000000;
+  color: #000;
   margin: 0;
   max-width: 636px;
 }
@@ -3492,7 +3488,7 @@ select {
   font-weight: 700;
   font-size: 20px;
   line-height: 1;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -3532,7 +3528,7 @@ select {
   height: 40px;
   padding: 0 36px 0 15px;
   border: 2px solid rgb(233, 233, 237);
-  background: #ffffff;
+  background: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 13px;
@@ -3546,7 +3542,7 @@ select {
   border-color: #B92770;
 }
 .product-select option:not([value=""]) {
-  color: #000000;
+  color: #000;
 }
 
 .product-select__arrow {
@@ -3609,7 +3605,7 @@ select {
   height: 55px;
   max-width: 470px;
   background: #B92770;
-  color: #ffffff;
+  color: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
@@ -3667,7 +3663,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #000000;
+  color: #000;
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.15s ease, border-color 0.15s ease;
@@ -3681,7 +3677,7 @@ select {
   outline-offset: 3px;
 }
 .product-tabs__tab.is-active {
-  color: #000000;
+  color: #000;
   border-bottom-color: #B92770;
 }
 
@@ -3712,7 +3708,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #000000;
+  color: #000;
   margin: 0 0 32px;
 }
 
@@ -3778,7 +3774,7 @@ select {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.6;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
@@ -3786,7 +3782,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 17px;
-  color: #000000;
+  color: #000;
   margin: 0 0 12px;
 }
 
@@ -3809,7 +3805,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 13px;
-  color: #000000;
+  color: #000;
   white-space: nowrap;
 }
 
@@ -3850,7 +3846,7 @@ select {
   height: 170px;
   padding: 14px 15px;
   border: 2px solid rgba(185, 39, 112, 0.5);
-  background: #ffffff;
+  background: #fff;
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
   color: rgb(114, 113, 116);
@@ -3875,7 +3871,7 @@ select {
   height: 40px;
   padding: 0 15px;
   border: 2px solid rgba(185, 39, 112, 0.5);
-  background: #ffffff;
+  background: #fff;
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
   color: rgb(114, 113, 116);
@@ -3913,8 +3909,8 @@ select {
   width: 90px;
   height: 40px;
   background: #B92770;
-  color: #ffffff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+  font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-weight: 700;
   font-size: 12px;
   border: none;
@@ -3960,7 +3956,7 @@ select {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: clamp(22px, 2.5vw, 30px);
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 

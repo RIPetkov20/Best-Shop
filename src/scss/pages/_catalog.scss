@@ -5,12 +5,6 @@
 // CATALOG PAGE
 // ═══════════════════════════════════════════════════════════
 
-$catalog-sidebar-w:  339px;
-$catalog-col-gap:    52px;
-$border-color:       rgba(233, 233, 237, 1);
-$text-muted:         rgba(80, 78, 74, 1);
-$star-color:         rgba(245, 180, 35, 1);
-
 // ─── Page wrapper ─────────────────────────────────────────
 .catalog-page {
   padding: 40px 0 80px;
@@ -22,6 +16,7 @@ $star-color:         rgba(245, 180, 35, 1);
   margin: 0 auto;
   padding: 0 20px; // Responsive padding
   display: grid;
+
   // Use 'minmax' to prevent the sidebar column from overflowing small desktops
   grid-template-columns: 1fr minmax(250px, $catalog-sidebar-w); 
   grid-template-rows: auto auto 1fr;
@@ -84,7 +79,7 @@ $star-color:         rgba(245, 180, 35, 1);
   white-space: nowrap;
   transition: border-color $transition-fast, color $transition-fast;
 
-  svg { width: 8px; height: 4px; stroke: currentColor; transition: transform $transition-fast; }
+  svg { width: 8px; height: 4px; stroke: currentcolor; transition: transform $transition-fast; }
 
   &:hover        { border-color: $color-primary; color: $color-primary; }
   &:focus-visible { @include focus-ring; }
@@ -149,7 +144,7 @@ $star-color:         rgba(245, 180, 35, 1);
   font-size: $font-size-base;
   color: $text-muted;
   min-width: 0;
-  &::placeholder { color: rgba(80, 78, 74, 0.5); }
+  &::placeholder { color: rgb(80 78 74 / 50%); }
   &:focus        { outline: none; }
   &::-webkit-search-cancel-button { display: none; }
 }
@@ -200,7 +195,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
 
 // The bordered box — contains selects + divider + buttons
 .catalog-filter-panel__body {
-  //border: 2px solid $color-primary;
+  // border: 2px solid $color-primary;
   background: $color-white;
   &[hidden] { display: none; }
 }
@@ -211,7 +206,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   display: flex;
   align-items: flex-start;
   gap: 26px;
-  padding: 23px 8px 16px 8px;
+  padding: 23px 8px 16px;
   flex-wrap: nowrap;
   overflow-x: auto;
 }
@@ -265,7 +260,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   font-family: $font-primary;
   font-weight: $font-weight-regular;
   font-size: 13px;
-  color: rgba(114, 113, 116, 1);
+  color: rgb(114 113 116 / 100%);
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 4'%3E%3Cpath d='M0 0l4 4 4-4' stroke='%23504E4A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -302,7 +297,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
 .catalog-filter-radio-label {
   font-family: $font-primary;
   font-size: 13px;
-  color: rgba(114, 113, 116, 1);
+  color: rgb(114 113 116 / 100%);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -385,7 +380,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   letter-spacing: 0.04em;
   transition: background-color $transition-fast, color $transition-fast;
 
-  svg { width: 8px; height: 4px; stroke: currentColor; }
+  svg { width: 8px; height: 4px; stroke: currentcolor; }
 
   &:hover:not(:disabled) { background: $color-primary; color: $color-white; }
   &:disabled             { opacity: 0.4; cursor: default; border-color: $border-color; }
@@ -412,7 +407,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   cursor: pointer;
   transition: background-color $transition-fast, color $transition-fast;
 
-  &:hover    { background: rgba(185, 39, 112, 0.08); color: $color-primary; }
+  &:hover    { background: rgb(185 39 112 / 8%); color: $color-primary; }
   &.is-active { background: $color-primary; color: $color-white; }
 }
 
@@ -461,7 +456,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   height: 87px;
   flex-shrink: 0;
   background: $color-white;
-  box-shadow: 0px 7px 15px 0px rgba(193, 199, 212, 0.4);
+  box-shadow: 0 7px 15px 0 rgb(193 199 212 / 40%);
   overflow: hidden;
 }
 
@@ -508,7 +503,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
 .catalog-popup {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgb(0 0 0 / 40%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -522,7 +517,7 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   display: flex;
   align-items: center;
   gap: 24px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 15%);
   min-width: 280px;
 }
 

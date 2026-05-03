@@ -1,67 +1,78 @@
 // ─── Colors ───────────────────────────────────────────────
-$color-primary:    #B92770;
-$color-black:      #000000;
-$color-white:      #ffffff;
-$color-border:     rgba(114, 113, 116, 1);
-$color-border-nav: rgba(114, 113, 116, 0.2);
-$color-text:       #000000;
-$color-bg:         #ffffff;
+$color-primary: #B92770;
+$color-black: #000;
+$color-white: #fff;
+$color-border: rgb(114 113 116 / 100%);
+$color-border-nav: rgb(114 113 116 / 20%);
+$color-text: #000;
+$color-bg: #fff;
 
 // ─── Typography ───────────────────────────────────────────
-$font-primary:   'Montserrat', sans-serif;
-$font-secondary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Helvetica Neue', helvetica, arial, sans-serif;
 $font-weight-regular: 400;
-$font-weight-medium:  500;
-$font-weight-bold:    700;
-
-$font-size-nav:   18px;
-$font-size-base:  16px;
-$font-size-sm:    15px;
-$font-size-xs:    14px;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-size-nav: 18px;
+$font-size-base: 16px;
+$font-size-sm: 15px;
+$font-size-xs: 14px;
 
 // ─── Footer ───────────────────────────────────────────────
-$footer-benefits-bg:  rgba(80, 78, 74, 1);
-$footer-main-bg:      $color-white;
-$footer-copyright-bg: rgba(0, 0, 0, 0.06);
+$footer-benefits-bg: rgb(80 78 74 / 100%);
+$footer-main-bg: $color-white;
+$footer-copyright-bg: rgb(0 0 0 / 6%);
 
 // ─── Breakpoints ──────────────────────────────────────────
-$bp-mobile:  768px;
-$bp-tablet:  1024px;
+$bp-mobile: 768px;
+$bp-tablet: 1024px;
 $bp-desktop: 1440px;
 
 // ─── Product Card ─────────────────────────────────────────
 $product-card-img-height: 400px;
-$product-card-btn-width:  156px;
+$product-card-btn-width: 156px;
 $product-card-btn-height: 40px;
-$product-sale-tag-w:      54px;
-$product-sale-tag-h:      28px;
+$product-sale-tag-w: 54px;
+$product-sale-tag-h: 28px;
 
 // ─── Layout ───────────────────────────────────────────────
-$header-max-width:  1313px;
-$header-padding-x:  clamp(16px, 4vw, 64px);
-
+$header-max-width: 1313px;
+$header-padding-x: clamp(16px, 4vw, 64px);
 $content-max-width: 1300px;
 $section-padding-x: clamp(16px, 5vw, 100px);
 
 // ─── Slider ───────────────────────────────────────────────
-$slider-card-height:   600px;
+$slider-card-height: 600px;
 $slider-card-height-t: 440px;   // tablet
 $slider-card-height-m: 360px;   // mobile
-$slider-gap:           39px;
+$slider-gap: 39px;
 
 // ─── Transitions ──────────────────────────────────────────
-$transition-fast:   0.15s ease;
+$transition-fast: 0.15s ease;
 $transition-normal: 0.25s ease;
 
 // ─── Z-index ──────────────────────────────────────────────
-$z-header:       100;
-$z-mobile-menu:  99;
-$z-overlay:      98;
+$z-header: 100;
+$z-mobile-menu: 99;
+$z-overlay: 98;
 
 // ----- catalog -----------
-$catalog-sidebar-w:  339px;
-$catalog-col-gap:    52px;
-$border-color:       rgba(233, 233, 237, 1);
-$text-muted:         rgba(80, 78, 74, 1);
-$star-color:         rgba(245, 180, 35, 1);
+$catalog-sidebar-w: 339px;
+$catalog-col-gap: 52px;
+$border-color: rgb(233 233 237 / 100%);
+$text-muted: rgb(80 78 74 / 100%);
+$star-color: rgb(245 180 35 / 100%);
+
+$cart-header-bg: rgb(80 78 74 / 100%);
+$cart-summary-bg: rgb(80 78 74 / 100%);
+$cart-divider: rgb(185 39 112 / 60%);
+$cart-row-divider: rgb(185 39 112 / 100%);
+$text-white: $color-white;
+
+$product-img-max: 645px;
+$product-info-max: 636px;
+$text-muted: rgb(80 78 74 / 100%);
+$text-placeholder: rgb(114 113 116 / 100%);
+$border-light: rgb(233 233 237 / 100%);
+$star-color: rgb(245 180 35 / 100%);
+$star-empty: rgb(233 233 237 / 100%);

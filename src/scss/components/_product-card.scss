@@ -25,7 +25,7 @@
   height: $product-card-img-height;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0px 20px 80px 0px rgba(193, 199, 212, 0.702);
+  box-shadow: 0 20px 80px 0 rgb(193 199 212 / 70.2%);
 }
 
 // ─── SALE badge ───────────────────────────────────────────
@@ -87,7 +87,7 @@
   font-weight: $font-weight-bold;
   font-size: 19px;
   line-height: 1;
-  color: rgba(80, 78, 74, 1);
+  color: rgb(80 78 74 / 100%);
   margin: 0;
 }
 
@@ -122,7 +122,7 @@
   .product-card__img-wrap {
     // Change height to auto so the box matches the image shape
     height: auto; 
-    box-shadow: 0px 10px 40px rgba(193, 199, 212, 0.5); // Optional: soften shadow for mobile
+    box-shadow: 0 10px 40px rgb(193 199 212 / 50%); // Optional: soften shadow for mobile
   }
   
   .product-card__img {

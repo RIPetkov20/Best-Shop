@@ -9,7 +9,6 @@ let currentPage = 1;
 const PAGE_SIZE = 12;
 const activeFilters = {};
 let sortValue = 'default';
-let filtersVisible = false;
 // ═══════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════

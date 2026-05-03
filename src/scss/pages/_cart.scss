@@ -5,12 +5,6 @@
 // CART PAGE
 // ═══════════════════════════════════════════════════════════
 
-$cart-header-bg:   rgba(80, 78, 74, 1);
-$cart-summary-bg:  rgba(80, 78, 74, 1);
-$cart-divider:     rgba(185, 39, 112, 0.6);
-$cart-row-divider: rgba(185, 39, 112, 1);
-$text-white:       $color-white;
-
 // ═══════════════════════════════════════════════════════════
 // HERO BANNER
 // ═══════════════════════════════════════════════════════════
@@ -36,7 +30,7 @@ $text-white:       $color-white;
 .cart-hero__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0 0 0 / 50%);
   z-index: 1;
 }
 
@@ -125,7 +119,7 @@ $text-white:       $color-white;
   height: 120px;
   object-fit: contain;
   display: block;
-  background: rgba(245, 245, 245, 1);
+  background: rgb(245 245 245 / 100%);
 }
 
 // Product name: 18px bold

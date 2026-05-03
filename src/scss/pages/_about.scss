@@ -36,8 +36,8 @@
   &::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.35);
+    inset: 0;
+    background: rgb(0 0 0 / 35%);
     z-index: 2;
   }
 
@@ -48,7 +48,7 @@
   }
 
   &__title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-weight: 700;
     font-size: 50px;
     line-height: 1.2;
@@ -57,13 +57,13 @@
   }
 
   &__subtitle {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-weight: 400;
     font-size: 18px;
     line-height: 1.4;
     max-width: 426px;
     margin: 0 auto;
-    color: rgba(233, 233, 237, 1);
+    color: rgb(233 233 237 / 100%);
   }
 }
 
@@ -120,7 +120,7 @@
   }
 
   &__title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-weight: 700;
     font-size: 20px;
     line-height: 1.2;
@@ -129,10 +129,10 @@
   }
 
   &__text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     font-weight: 400;
     font-size: 17px;
     line-height: 1.4;
-    color: rgba(0, 0, 0, 0.75);
+    color: rgb(0 0 0 / 75%);
   }
 }
