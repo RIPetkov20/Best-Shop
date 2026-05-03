@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cart – Best Shop</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../dist/main.css" />
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="cart-page">
+
+    <!-- ══ HERO BANNER ══ -->
+    <div class="cart-hero">
+      <img
+        class="cart-hero__bg"
+        src="../assets/images/cart/banner-image.jpg"
+        alt=""
+        aria-hidden="true"
+        onerror="this.style.display='none'"
+      />
+      <div class="cart-hero__overlay" aria-hidden="true"></div>
+      <h1 class="cart-hero__title">My Cart</h1>
+    </div>
+
+    <!-- ══ CART CONTENT ══ -->
+    <div class="cart-content">
+      <div class="cart-content__inner">
+
+        <!-- ── TABLE ── -->
+        <div class="cart-table-wrap" id="cart-table-wrap">
+
+          <!-- Table header -->
+          <div class="cart-table__head">
+            <span class="cart-table__col cart-table__col--image">IMAGE</span>
+            <span class="cart-table__col cart-table__col--name">PRODUCT NAME</span>
+            <span class="cart-table__col cart-table__col--price">PRICE</span>
+            <span class="cart-table__col cart-table__col--qty">QUANTITY</span>
+            <span class="cart-table__col cart-table__col--total">TOTAL</span>
+            <span class="cart-table__col cart-table__col--delete">DELETE</span>
+          </div>
+
+          <!-- Table body — rendered by cart.ts -->
+          <div class="cart-table__body" id="cart-table-body">
+          </div>
+
+          <!-- Empty state (hidden while items exist) -->
+          <div class="cart-empty" id="cart-empty" hidden>
+            <p class="cart-empty__text">
+              Your cart is empty. Use the
+              <a href="/src/html/catalog.html">catalog</a>
+              to add new items.
+            </p>
+          </div>
+
+          <!-- Thank you state (shown after checkout) -->
+          <div class="cart-thankyou" id="cart-thankyou" hidden>
+            <p class="cart-thankyou__text">Thank you for your purchase.</p>
+          </div>
+
+        </div>
+
+        <!-- ── BOTTOM ROW: action buttons (left) + checkout (right) ── -->
+        <div class="cart-bottom" id="cart-bottom">
+
+          <!-- Action buttons -->
+          <div class="cart-actions">
+            <button class="cart-actions__btn" id="cart-continue" type="button">
+              CONTINUE SHOPPING
+            </button>
+            <button class="cart-actions__btn" id="cart-clear" type="button">
+              CLEAR SHOPPING CART
+            </button>
+          </div>
+
+          <!-- Checkout summary panel -->
+          <div class="cart-summary" id="cart-summary">
+            <div class="cart-summary__row">
+              <span class="cart-summary__label">Sub Total</span>
+              <span class="cart-summary__value" id="cart-subtotal">$0</span>
+            </div>
+            <div class="cart-summary__divider"></div>
+
+            <!-- Discount row (hidden unless total > $3000) -->
+            <div class="cart-summary__row cart-summary__row--discount" id="cart-discount-row" hidden>
+              <span class="cart-summary__label">Discount</span>
+              <span class="cart-summary__value" id="cart-discount">−$0</span>
+            </div>
+            <div class="cart-summary__divider cart-summary__divider--discount" id="cart-discount-divider" hidden></div>
+
+            <div class="cart-summary__row">
+              <span class="cart-summary__label">Shipping</span>
+              <span class="cart-summary__value" id="cart-shipping">$30</span>
+            </div>
+            <div class="cart-summary__divider"></div>
+
+            <div class="cart-summary__row cart-summary__row--total">
+              <span class="cart-summary__label cart-summary__label--total">Total</span>
+              <span class="cart-summary__value cart-summary__value--total" id="cart-total">$30</span>
+            </div>
+
+            <button class="cart-summary__checkout-btn" id="cart-checkout" type="button">
+              CHECKOUT
+            </button>
+          </div>
+
+        </div><!-- /.cart-bottom -->
+      </div><!-- /.cart-content__inner -->
+    </div><!-- /.cart-content -->
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script type="module" src="../../dist/js/main.js"></script>
+  <script type="module" src="../../dist/js/cartPage.js"></script>
+</body>
+</html>

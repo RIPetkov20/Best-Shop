@@ -1,0 +1,596 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ═══════════════════════════════════════════════════════════
+// CATALOG PAGE
+// ═══════════════════════════════════════════════════════════
+
+$catalog-sidebar-w:  339px;
+$catalog-col-gap:    52px;
+$border-color:       rgba(233, 233, 237, 1);
+$text-muted:         rgba(80, 78, 74, 1);
+$star-color:         rgba(245, 180, 35, 1);
+
+// ─── Page wrapper ─────────────────────────────────────────
+.catalog-page {
+  padding: 40px 0 80px;
+  background: $color-white;
+}
+
+.catalog-page__inner {
+  max-width: $content-max-width; // Ensure this is not larger than 1300px
+  margin: 0 auto;
+  padding: 0 20px; // Responsive padding
+  display: grid;
+  // Use 'minmax' to prevent the sidebar column from overflowing small desktops
+  grid-template-columns: 1fr minmax(250px, $catalog-sidebar-w); 
+  grid-template-rows: auto auto 1fr;
+  column-gap: 40px; 
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// ═══════════════════════════════════════════════════════════
+// TOOLBAR  –  results left | sort + search right
+// ═══════════════════════════════════════════════════════════
+.catalog-toolbar {
+  grid-column: 1 / 2; // Keep it aligned with product cards
+  display: flex;
+  flex-wrap: wrap; // Allows items to wrap on smaller screens instead of scrolling
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  &__right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; // Essential for responsive
+    gap: 15px;
+  }
+}
+
+.catalog-toolbar__results {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: $font-size-base;
+  color: $text-muted;
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.catalog-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+// ─── Filters toggle button ────────────────────────────────
+.catalog-filters-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border: 2px solid $border-color;
+  background: $color-white;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  color: $text-muted;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color $transition-fast, color $transition-fast;
+
+  svg { width: 8px; height: 4px; stroke: currentColor; transition: transform $transition-fast; }
+
+  &:hover        { border-color: $color-primary; color: $color-primary; }
+  &:focus-visible { @include focus-ring; }
+
+  &.is-active {
+    border-color: $color-primary;
+    color: $color-primary;
+    svg { transform: rotate(180deg); }
+  }
+}
+
+// ─── Sort ─────────────────────────────────────────────────
+.catalog-sort {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.catalog-sort__select {
+  height: 40px;
+  width: 202px;
+  padding: 0 36px 0 14px;
+  border: 2px solid $border-color;
+  background: $color-white;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  color: $text-muted;
+  appearance: none;
+  cursor: pointer;
+  &:focus { outline: 2px solid $color-primary; }
+}
+
+.catalog-sort__arrow {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  width: 8px;
+  height: 4px;
+  stroke: $text-muted;
+}
+
+// ─── Search ───────────────────────────────────────────────
+.catalog-search {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  max-width: 341px; // Maximum size, but will shrink if needed
+  position: relative;
+  background: $color-white;
+}
+
+.catalog-search__input {
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+  height: 48px;
+  padding: 0 14px;
+  border: none;
+  background: transparent;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  color: $text-muted;
+  min-width: 0;
+  &::placeholder { color: rgba(80, 78, 74, 0.5); }
+  &:focus        { outline: none; }
+  &::-webkit-search-cancel-button { display: none; }
+}
+
+.catalog-search__btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 100%;
+  background: none;
+  border: none;
+  border-left: 1px solid $border-color;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-muted;
+  transition: color $transition-fast;
+  &:hover { color: $color-primary; }
+  svg { width: 17px; height: 17px; }
+}
+
+// ═══════════════════════════════════════════════════════════
+// FILTER PANEL  –  exact Figma specs
+// Box: 1300×250px, border 2px solid #B92770
+// Selects row (top 23px) | divider (top 132px) | buttons (top 191px)
+// ═══════════════════════════════════════════════════════════
+.catalog-filter-panel {
+grid-column: 1 / 2; // Only spans the products column to prevent widening
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+// "Filters" text — toggle button, plain style
+.catalog-filter-panel__label {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0 0 10px;
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: $font-size-base;
+  color: $text-muted;
+  cursor: pointer;
+  text-align: left;
+  &:hover { color: $color-primary; }
+}
+
+// The bordered box — contains selects + divider + buttons
+.catalog-filter-panel__body {
+  //border: 2px solid $color-primary;
+  background: $color-white;
+  &[hidden] { display: none; }
+}
+
+// Filter selects row — 4 groups side by side
+// Figma: groups start at left offsets 8, 334, 658, 989 within the box (relative)
+.catalog-filter-panel__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 26px;
+  padding: 23px 8px 16px 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+// Pink horizontal line separating selects from buttons
+.catalog-filter-panel__divider {
+  height: 2px;
+  background-color: $color-primary;
+  width: 100%;
+}
+
+// Buttons area below divider
+.catalog-filter-panel__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 29px 8px;
+}
+
+// Single filter group: label + select  (300×74px per Figma)
+.catalog-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  flex: 0 0 300px;             // exactly 300px per Figma
+  min-width: 0;
+
+  &.is-active .catalog-filter-select {
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+}
+
+// Label: 17px bold, rgba(80,78,74,1)
+.catalog-filter-group__label {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 17px;
+  line-height: 1;
+  color: $text-muted;
+  margin: 0;
+}
+
+// Select: 300×40px, border 2px rgba(233,233,237,1), text 13px rgba(114,113,116,1)
+.catalog-filter-select {
+  width: 300px;
+  height: 40px;
+  padding: 0 32px 0 15px;
+  border: 2px solid $border-color;
+  background: $color-white;
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 13px;
+  color: rgba(114, 113, 116, 1);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 4'%3E%3Cpath d='M0 0l4 4 4-4' stroke='%23504E4A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 8px 4px;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:focus { outline: 2px solid $color-primary; border-color: $color-primary; }
+  option:not([value=""]) { color: $color-black; }
+}
+
+// Sales group — radio button style (Figma shows eclipse/radio, not checkbox)
+.catalog-filter-group--sales {
+  flex: 0 0 auto;
+  min-width: unset;
+}
+
+.catalog-filter-radio-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+}
+
+.catalog-filter-radio {
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  accent-color: $color-black;
+  flex-shrink: 0;
+}
+
+.catalog-filter-radio-label {
+  font-family: $font-primary;
+  font-size: 13px;
+  color: rgba(114, 113, 116, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+// Buttons: 224×60px each, pink background, 15px bold white text
+.catalog-filter-panel__btn {
+  width: 224px;
+  height: 60px;
+  background: $color-primary;
+  color: $color-white;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color $transition-fast;
+
+  &:hover         { background: darken(#B92770, 8%); }
+  &:focus-visible { @include focus-ring; }
+}
+
+// ═══════════════════════════════════════════════════════════
+// CATALOG BODY  –  product grid + pagination
+// ═══════════════════════════════════════════════════════════
+.catalog-body {
+  grid-column: 1 / 2;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+// 3-column product grid
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  // Images fill the card area — no white space
+  .product-card__img {
+    object-fit: cover;
+  }
+}
+
+.catalog-grid--empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  color: $text-muted;
+}
+
+// ═══════════════════════════════════════════════════════════
+// PAGINATION
+// ═══════════════════════════════════════════════════════════
+.catalog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.catalog-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border: 2px solid $color-primary;
+  background: $color-white;
+  font-family: $font-secondary;
+  font-weight: $font-weight-bold;
+  font-size: 11px;
+  color: $color-black;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  svg { width: 8px; height: 4px; stroke: currentColor; }
+
+  &:hover:not(:disabled) { background: $color-primary; color: $color-white; }
+  &:disabled             { opacity: 0.4; cursor: default; border-color: $border-color; }
+}
+
+.catalog-pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.catalog-pagination__page {
+  width: 41px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  font-family: $font-secondary;
+  font-weight: $font-weight-medium;
+  font-size: 15px;
+  color: $color-black;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover    { background: rgba(185, 39, 112, 0.08); color: $color-primary; }
+  &.is-active { background: $color-primary; color: $color-white; }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SIDEBAR  –  Top Best Sets
+// ═══════════════════════════════════════════════════════════
+.catalog-sidebar {
+  grid-column: 2 / 3;
+  grid-row: 3;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 20px;
+
+  &__title {
+    margin-top: 0; // Remove top margin so it aligns perfectly with the first card
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+}
+
+.catalog-sidebar__title {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 17px;
+  color: $color-black;
+  margin: 0 0 24px;
+}
+
+.catalog-sidebar__list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.best-set {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  cursor: pointer;
+  &:hover .best-set__name { color: $color-primary; }
+}
+
+.best-set__img-wrap {
+  width: 87px;
+  height: 87px;
+  flex-shrink: 0;
+  background: $color-white;
+  box-shadow: 0px 7px 15px 0px rgba(193, 199, 212, 0.4);
+  overflow: hidden;
+}
+
+.best-set__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.best-set__info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.best-set__name {
+  font-family: $font-primary;
+  font-size: 15px;
+  line-height: 1.35;
+  color: $color-black;
+  margin: 0;
+  transition: color $transition-fast;
+}
+
+.best-set__stars {
+  display: flex;
+  gap: 2px;
+  svg { width: 13px; height: 13px; }
+}
+
+.best-set__price {
+  font-family: $font-primary;
+  font-size: 15px;
+  color: $color-black;
+  margin: 0;
+}
+
+// ═══════════════════════════════════════════════════════════
+// POPUP
+// ═══════════════════════════════════════════════════════════
+.catalog-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  &[hidden] { display: none; }
+}
+
+.catalog-popup__box {
+  background: $color-white;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+}
+
+.catalog-popup__text {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-base;
+  color: $color-black;
+  margin: 0;
+}
+
+.catalog-popup__close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: $text-muted;
+  margin-left: auto;
+  transition: color $transition-fast;
+  &:hover { color: $color-primary; }
+}
+
+// ═══════════════════════════════════════════════════════════
+// RESPONSIVE
+// ═══════════════════════════════════════════════════════════
+@include tablet {
+  .catalog-page__inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .catalog-sidebar {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+
+  .catalog-toolbar    { grid-column: 1 / 2; }
+  .catalog-filter-panel { grid-column: 1 / 2; }
+  .catalog-body       { grid-column: 1 / 2; }
+
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+  .catalog-search { width: 100%; max-width: 341px; }
+  .catalog-sort__select { width: 180px; }
+}
+
+@include mobile {
+  .catalog-page { padding: 24px 0 48px; }
+  .catalog-page__inner { padding: 0 16px; gap: 16px; }
+
+  .catalog-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .catalog-toolbar__right {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .catalog-grid { grid-template-columns: 1fr; gap: 24px; }
+
+  .catalog-sort__select { width: 100%; max-width: 300px; }
+  .catalog-search       { width: 100%; max-width: 100%; }
+
+  .catalog-filter-panel__row { flex-direction: column; gap: 16px; }
+  .catalog-filter-group      { min-width: 0; width: 100%; }
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalog – Best Shop</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../dist/main.css" />
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="catalog-page">
+    <div class="catalog-page__inner">
+
+      <!-- ══ TOP BAR: results | sort | search ══ -->
+      <div class="catalog-toolbar">
+
+        <p class="catalog-toolbar__results" id="catalog-results-text">
+          Showing 1–12 of 20 Results
+        </p>
+
+        <div class="catalog-toolbar__right">
+
+          <!-- Sort -->
+          <div class="catalog-sort">
+            <select class="catalog-sort__select" id="catalog-sort" aria-label="Sort products">
+              <option value="default">Default Sorting</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="popularity">Most Popular</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+            <svg class="catalog-sort__arrow" viewBox="0 0 8 4" aria-hidden="true">
+              <path d="M0 0l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+
+          <!-- Search -->
+          <div class="catalog-search">
+            <input class="catalog-search__input" id="catalog-search-input"
+                   type="search" placeholder="Search Models" aria-label="Search products" />
+            <button class="catalog-search__btn" id="catalog-search-btn"
+                    type="button" aria-label="Search">
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 12l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══ FILTER PANEL (toggled by clicking "Filters" label) ══ -->
+      <div class="catalog-filter-panel" id="catalog-filter-panel"
+           aria-label="Filters panel">
+
+        <button class="catalog-filter-panel__label" id="catalog-filters-toggle"
+                type="button" aria-expanded="false" aria-controls="catalog-filter-panel-body">
+          Filters
+        </button>
+        <div class="catalog-filter-panel__divider"></div>
+
+        <div class="catalog-filter-panel__body" id="catalog-filter-panel-body" hidden>
+          <div class="catalog-filter-panel__row">
+
+            <!-- Size -->
+            <div class="catalog-filter-group">
+              <label class="catalog-filter-group__label" for="filter-size">Size</label>
+              <select class="catalog-filter-select" id="filter-size"
+                      data-filter-key="size" aria-label="Filter by size">
+                <option value="">Choose option</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="S, M, XL">S, M, XL</option>
+              </select>
+            </div>
+
+            <!-- Color -->
+            <div class="catalog-filter-group">
+              <label class="catalog-filter-group__label" for="filter-color">Color</label>
+              <select class="catalog-filter-select" id="filter-color"
+                      data-filter-key="color" aria-label="Filter by color">
+                <option value="">Choose option</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="black">Black</option>
+                <option value="grey">Grey</option>
+                <option value="yellow">Yellow</option>
+                <option value="pink">Pink</option>
+              </select>
+            </div>
+
+            <!-- Category -->
+            <div class="catalog-filter-group">
+              <label class="catalog-filter-group__label" for="filter-category">Category</label>
+              <select class="catalog-filter-select" id="filter-category"
+                      data-filter-key="category" aria-label="Filter by category">
+                <option value="">Choose option</option>
+                <option value="suitcases">Suitcases</option>
+                <option value="carry-ons">Carry-Ons</option>
+                <option value="luggage sets">Luggage Sets</option>
+                <option value="kids' luggage">Kids' Luggage</option>
+              </select>
+            </div>
+
+            <!-- Sales (radio button per Figma) -->
+            <div class="catalog-filter-group catalog-filter-group--sales">
+              <label class="catalog-filter-group__label">Sales</label>
+              <div class="catalog-filter-radio-group">
+                <input class="catalog-filter-radio" id="filter-sales"
+                       type="radio" name="sales-filter"
+                       data-filter-key="salesStatus" data-filter-value="true" />
+                <label class="catalog-filter-radio-label" for="filter-sales">On Sale</label>
+              </div>
+            </div>
+
+          </div><!-- /.catalog-filter-panel__row -->
+        </div><!-- /.catalog-filter-panel__body -->
+
+        <div class="catalog-filter-panel__divider"></div>
+
+        <div class="catalog-filter-panel__actions">
+          <button class="catalog-filter-panel__btn catalog-filter-panel__btn--clear"
+                  id="catalog-clear-filters" type="button">
+            CLEAR FILTERS
+          </button>
+          <button class="catalog-filter-panel__btn catalog-filter-panel__btn--hide"
+                  id="catalog-hide-filters" type="button">
+            HIDE FILTERS
+          </button>
+        </div>
+
+      </div><!-- /.catalog-filter-panel -->
+
+      <!-- ══ CATALOG BODY: grid + pagination ══ -->
+      <div class="catalog-body">
+        <div class="catalog-grid" id="catalog-grid" aria-live="polite"></div>
+
+        <div class="catalog-pagination" id="catalog-pagination" aria-label="Pagination">
+          <button class="catalog-pagination__btn catalog-pagination__btn--prev"
+                  id="catalog-prev" type="button" aria-label="Previous page" disabled>
+            <svg viewBox="0 0 8 4" aria-hidden="true">
+              <path d="M8 0L4 4 0 0" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+            PREV
+          </button>
+          <div class="catalog-pagination__pages" id="catalog-pages" role="list"></div>
+          <button class="catalog-pagination__btn catalog-pagination__btn--next"
+                  id="catalog-next" type="button" aria-label="Next page">
+            NEXT
+            <svg viewBox="0 0 8 4" aria-hidden="true">
+              <path d="M0 4L4 0 8 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ══ SIDEBAR: Top Best Sets ══ -->
+      <aside class="catalog-sidebar" aria-label="Top Best Sets">
+        <h2 class="catalog-sidebar__title">Top Best Sets</h2>
+        <div class="catalog-sidebar__list" id="top-best-sets"></div>
+      </aside>
+
+    </div>
+
+    <!-- "Product not found" popup -->
+    <div class="catalog-popup" id="catalog-popup" role="alert" aria-live="assertive" hidden>
+      <div class="catalog-popup__box">
+        <p class="catalog-popup__text">Product not found</p>
+        <button class="catalog-popup__close" id="catalog-popup-close"
+                type="button" aria-label="Close">✕</button>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script type="module" src="../../dist/js/main.js"></script>
+  <script type="module" src="../../dist/js/catalog.js"></script>
+</body>
+</html>

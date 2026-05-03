@@ -1,4 +1,3 @@
-"use strict";
 // ═══════════════════════════════════════════════════════════
 // HOME PAGE
 // ═══════════════════════════════════════════════════════════
@@ -11,28 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// ─── Cart helpers (shared with main.ts via localStorage) ──
-function getCart() {
-    const stored = localStorage.getItem('cart');
-    return stored ? JSON.parse(stored) : [];
-}
-function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    // Notify all cart-count badges (main.ts listener picks this up)
-    window.dispatchEvent(new Event('storage'));
-}
-function addToCart(product) {
-    const cart = getCart();
-    cart.push(product);
-    saveCart(cart);
-    updateAllCartBadges(cart.length);
-}
-function updateAllCartBadges(count) {
-    document.querySelectorAll('.cart-count').forEach(badge => {
-        badge.textContent = String(count);
-        badge.dataset['count'] = String(count);
-    });
-}
+import { getCart, addToCart, updateCartBadges } from './cart.js';
 // ═══════════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════════
@@ -42,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     void loadSelectedProducts();
     void loadNewProducts();
     // Sync cart badge on page load
-    updateAllCartBadges(getCart().length);
+    updateCartBadges(getCart().length);
 });
 // ───────────────────────────────────────────────────────────
 // DISCOUNT BUTTON
@@ -93,7 +71,7 @@ function loadSelectedProducts() {
                 card.addEventListener('click', () => {
                     const id = card.dataset['productId'];
                     if (id)
-                        window.location.href = `/src/html/product.html?id=${id}`;
+                        window.location.href = `/src/html/product-details.html?id=${id}`;
                 });
             });
         }
@@ -163,7 +141,7 @@ function loadNewProducts() {
                 card.addEventListener('click', () => {
                     const id = card.dataset['productId'];
                     if (id)
-                        window.location.href = `/src/html/product.html?id=${id}`;
+                        window.location.href = `/src/html/product-details.html?id=${id}`;
                 });
             });
         }

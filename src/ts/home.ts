@@ -2,46 +2,7 @@
 // HOME PAGE
 // ═══════════════════════════════════════════════════════════
 
-// ─── Types ────────────────────────────────────────────────
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  category: string;
-  color: string;
-  size: string;
-  salesStatus: boolean;
-  rating: number;
-  popularity: number;
-  blocks: string[];
-}
-
-// ─── Cart helpers (shared with main.ts via localStorage) ──
-function getCart(): Product[] {
-  const stored = localStorage.getItem('cart');
-  return stored ? (JSON.parse(stored) as Product[]) : [];
-}
-
-function saveCart(cart: Product[]): void {
-  localStorage.setItem('cart', JSON.stringify(cart));
-  // Notify all cart-count badges (main.ts listener picks this up)
-  window.dispatchEvent(new Event('storage'));
-}
-
-function addToCart(product: Product): void {
-  const cart = getCart();
-  cart.push(product);
-  saveCart(cart);
-  updateAllCartBadges(cart.length);
-}
-
-function updateAllCartBadges(count: number): void {
-  document.querySelectorAll<HTMLElement>('.cart-count').forEach(badge => {
-    badge.textContent = String(count);
-    badge.dataset['count'] = String(count);
-  });
-}
+import { Product, getCart, addToCart, updateCartBadges } from './cart.js';
 
 // ═══════════════════════════════════════════════════════════
 // INIT
@@ -52,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   void loadSelectedProducts();
   void loadNewProducts();
   // Sync cart badge on page load
-  updateAllCartBadges(getCart().length);
+  updateCartBadges(getCart().length);
 });
 
 // ───────────────────────────────────────────────────────────
@@ -111,7 +72,7 @@ async function loadSelectedProducts(): Promise<void> {
     grid.querySelectorAll<HTMLElement>('.product-card').forEach(card => {
       card.addEventListener('click', () => {
         const id = card.dataset['productId'];
-        if (id) window.location.href = `/src/html/product.html?id=${id}`;
+        if (id) window.location.href = `/src/html/product-details.html?id=${id}`;
       });
     });
 
@@ -189,7 +150,7 @@ async function loadNewProducts(): Promise<void> {
     grid.querySelectorAll<HTMLElement>('.product-card').forEach(card => {
       card.addEventListener('click', () => {
         const id = card.dataset['productId'];
-        if (id) window.location.href = `/src/html/product.html?id=${id}`;
+        if (id) window.location.href = `/src/html/product-details.html?id=${id}`;
       });
     });
 

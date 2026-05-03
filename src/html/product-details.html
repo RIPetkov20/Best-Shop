@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details – Best Shop</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../dist/main.css" />
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <main id="main-content" class="product-page">
+    <div class="product-page__inner">
+
+      <!-- ══ PRODUCT HERO: gallery + info ══ -->
+      <section class="product-hero" aria-label="Product details">
+
+        <!-- LEFT: image gallery -->
+        <div class="product-gallery">
+            <div class="product-gallery__main-wrap">
+                <img id="product-main-img" class="product-gallery__main-img" src="" alt="Product image" />
+            </div>
+            <div class="product-gallery__thumbs" id="product-thumbs" role="list">
+            </div>
+        </div>
+
+        <!-- RIGHT: product info -->
+        <div class="product-info">
+
+          <h1 class="product-info__name" id="product-name">Loading…</h1>
+
+          <div class="product-info__rating-row">
+            <div
+              class="product-stars"
+              id="product-stars"
+              role="img"
+              aria-label="Product rating"
+            ></div>
+            <span class="product-info__review-count" id="product-review-count"></span>
+          </div>
+
+          <p class="product-info__price" id="product-price"></p>
+
+          <p class="product-info__desc" id="product-desc1"></p>
+          <p class="product-info__desc" id="product-desc2"></p>
+
+          <!-- Size / Color / Category selectors -->
+          <div class="product-selectors">
+
+            <div class="product-selector">
+              <label class="product-selector__label" for="sel-size">Size</label>
+              <div class="product-selector__wrap">
+                <select class="product-selector__select" id="sel-size" aria-label="Choose size">
+                  <option value="">Choose option</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="S, M, XL">S, M, XL</option>
+                  <option value="S-L">S-L</option>
+                </select>
+                <svg class="product-selector__arrow" viewBox="0 0 8 4" aria-hidden="true">
+                  <path d="M0 0l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="product-selector">
+              <label class="product-selector__label" for="sel-color">Color</label>
+              <div class="product-selector__wrap">
+                <select class="product-selector__select" id="sel-color" aria-label="Choose color">
+                  <option value="">Choose option</option>
+                  <option value="red">Red</option>
+                  <option value="blue">Blue</option>
+                  <option value="green">Green</option>
+                  <option value="black">Black</option>
+                  <option value="grey">Grey</option>
+                  <option value="yellow">Yellow</option>
+                  <option value="pink">Pink</option>
+                </select>
+                <svg class="product-selector__arrow" viewBox="0 0 8 4" aria-hidden="true">
+                  <path d="M0 0l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="product-selector">
+              <label class="product-selector__label" for="sel-category">Category</label>
+              <div class="product-selector__wrap">
+                <select class="product-selector__select" id="sel-category" aria-label="Choose category">
+                  <option value="">Choose option</option>
+                  <option value="suitcases">Suitcases</option>
+                  <option value="carry-ons">Carry-Ons</option>
+                  <option value="luggage sets">Luggage Sets</option>
+                  <option value="kids' luggage">Kids' Luggage</option>
+                </select>
+                <svg class="product-selector__arrow" viewBox="0 0 8 4" aria-hidden="true">
+                  <path d="M0 0l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+            </div>
+
+          </div><!-- /.product-selectors -->
+
+          <!-- Quantity + Add to Cart -->
+          <div class="product-purchase">
+            <div class="product-qty" role="group" aria-label="Select quantity">
+              <button
+                class="product-qty__btn"
+                id="qty-minus"
+                type="button"
+                aria-label="Decrease quantity"
+              >−</button>
+              <span
+                class="product-qty__value"
+                id="qty-value"
+                aria-live="polite"
+                aria-atomic="true"
+              >1</span>
+              <button
+                class="product-qty__btn"
+                id="qty-plus"
+                type="button"
+                aria-label="Increase quantity"
+              >+</button>
+            </div>
+
+            <button
+              class="product-purchase__add-btn"
+              id="add-to-cart-btn"
+              type="button"
+            >
+              Add To Cart
+            </button>
+          </div>
+
+          <!-- Payment methods -->
+          <div class="product-payment" aria-label="Accepted payment methods">
+                <span class="product-payment__label">Payment:</span>
+                
+                <img src="../assets/images/product-details/visa-pay-logo.svg" alt="Visa" class="product-payment__icon">
+                <img src="../assets/images/product-details/american-express-logo.svg" alt="American Express" class="product-payment__icon">
+                <img src="../assets/images/product-details/mastercard-logo.svg" alt="Mastercard" class="product-payment__icon">
+                <img src="../assets/images/product-details/paypal-logo.svg" alt="PayPal" class="product-payment__icon">
+            </div>
+
+        </div><!-- /.product-info -->
+      </section>
+
+      <!-- ══ TABS: Details | Reviews | Shipping Policy ══ -->
+      <section class="product-tabs" aria-label="Product information">
+
+        <div class="product-tabs__nav" role="tablist" aria-label="Product information tabs">
+          <button
+            class="product-tabs__tab product-tabs__tab--active"
+            role="tab"
+            id="btn-details"
+            aria-selected="true"
+            aria-controls="tab-details"
+            data-tab="details"
+            type="button"
+          >Details</button>
+
+          <button
+            class="product-tabs__tab"
+            role="tab"
+            id="btn-reviews"
+            aria-selected="false"
+            aria-controls="tab-reviews"
+            data-tab="reviews"
+            type="button"
+          >Reviews</button>
+
+          <button
+            class="product-tabs__tab"
+            role="tab"
+            id="btn-shipping"
+            aria-selected="false"
+            aria-controls="tab-shipping"
+            data-tab="shipping"
+            type="button"
+          >Shipping Policy</button>
+        </div>
+
+        <!-- Details panel -->
+        <div
+          class="product-tabs__panel"
+          role="tabpanel"
+          id="tab-details"
+          aria-labelledby="btn-details"
+        >
+          <p>Vestibulum commodo sapien non elit porttitor, vitae volutpat nibh mollis. Nulla porta risus id neque tempor, in efficitur justo imperdiet. Etiam a ex at ante tincidunt imperdiet. Nunc congue ex vel nisl viverra, sit amet aliquet lectus ullamcorper. Praesent luctus lacus non lorem elementum, eu tristique sapien suscipit. Sed bibendum, ipsum nec viverra malesuada, erat nisi sodales purus, eget hendrerit dui ligula eu enim. Ut non est nisi. Pellentesque tristique pretium dolor eu commodo. Proin iaculis nibh vitae lectus mollis bibendum. Quisque varius eget urna sit amet luctus. Suspendisse potenti. Curabitur ac placerat est, sit amet sodales risus. Pellentesque viverra dui auctor, ullamcorper turpis pharetra, facilisis quam.</p>
+          <p>Proin iaculis nibh vitae lectus mollis bibendum. Quisque varius eget urna sit amet luctus. Suspendisse potenti. Curabitur ac placerat est, sit amet sodales risus. Pellentesque viverra dui auctor, ullamcorper turpis pharetra, facilisis quam. Proin iaculis nibh vitae lectus mollis bibendum.</p>
+          <p>Quisque varius eget urna sit amet luctus. Suspendisse potenti. Curabitur ac placerat est, sit amet sodales risus. Pellentesque viverra dui auctor, ullamcorper turpis pharetra, facilisis quam.</p>
+        </div>
+
+        <!-- Reviews panel -->
+        <div
+          class="product-tabs__panel product-tabs__panel--hidden"
+          role="tabpanel"
+          id="tab-reviews"
+          aria-labelledby="btn-reviews"
+        >
+          <div class="product-reviews">
+
+            <!-- Left: existing reviews -->
+            <div class="product-reviews__existing">
+              <h3 class="product-reviews__count-title" id="reviews-count-title">
+                1 new review for product
+              </h3>
+
+              <div class="product-reviews__list" id="reviews-list">
+                <article class="review-item">
+                  <div class="review-item__header">
+                    <img
+                      class="review-item__avatar"
+                      src="../assets/images/product-details/review-customer.png"
+                      alt="Ella Harper"
+                      width="46"
+                      height="46"
+                      onerror="this.style.background='#ddd';this.style.borderRadius='50%'"
+                    />
+                    <span class="review-item__name">Ella Harper</span>
+                    <span class="review-item__date">/ June 11, 2025</span>
+                    <div class="review-item__stars" aria-label="4 out of 5 stars">
+                      <span class="review-item__star review-item__star--filled">★</span>
+                      <span class="review-item__star review-item__star--filled">★</span>
+                      <span class="review-item__star review-item__star--filled">★</span>
+                      <span class="review-item__star review-item__star--filled">★</span>
+                      <span class="review-item__star">★</span>
+                    </div>
+                  </div>
+                  <p class="review-item__text">
+                    Proin iaculis nibh vitae lectus mollis bibendum. Quisque varius eget urna sit amet luctus. Suspendisse potenti curabitur ac placerat est, sit amet sodales risus.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <!-- Right: add review form -->
+            <div class="product-reviews__add">
+              <h3 class="product-reviews__form-title">Add Review</h3>
+              <p class="product-reviews__form-notice">
+                Your email address won't be shared with anybody. Required fields have the symbol *
+              </p>
+
+              <div class="product-reviews__rate-row">
+                <span class="product-reviews__rate-label">RATE PRODUCT</span>
+                <div
+                  class="product-reviews__rate-stars"
+                  id="rate-stars"
+                  role="group"
+                  aria-label="Rate this product"
+                >
+                  <button class="rate-star" data-value="1" type="button" aria-label="1 star">★</button>
+                  <button class="rate-star" data-value="2" type="button" aria-label="2 stars">★</button>
+                  <button class="rate-star" data-value="3" type="button" aria-label="3 stars">★</button>
+                  <button class="rate-star" data-value="4" type="button" aria-label="4 stars">★</button>
+                  <button class="rate-star" data-value="5" type="button" aria-label="5 stars">★</button>
+                </div>
+              </div>
+
+              <form class="review-form" id="review-form" novalidate>
+
+                <div class="review-form__field">
+                  <textarea
+                    class="review-form__textarea"
+                    id="review-text"
+                    name="review"
+                    placeholder="Your Review*"
+                    rows="7"
+                    aria-required="true"
+                    aria-label="Your review"
+                  ></textarea>
+                </div>
+
+                <div class="review-form__row">
+                  <input
+                    class="review-form__input"
+                    id="review-name"
+                    type="text"
+                    name="name"
+                    placeholder="Your Name*"
+                    aria-required="true"
+                    aria-label="Your name"
+                  />
+                  <input
+                    class="review-form__input"
+                    id="review-email"
+                    type="email"
+                    name="email"
+                    placeholder="Your Email*"
+                    aria-required="true"
+                    aria-label="Your email"
+                  />
+                </div>
+
+                <div class="review-form__check-row">
+                  <input
+                    class="review-form__checkbox"
+                    id="review-save"
+                    type="checkbox"
+                    name="save"
+                  />
+                  <label class="review-form__check-label" for="review-save">
+                    Save my name, email, and website in this browser for when I leave another comment.
+                  </label>
+                </div>
+
+                <button class="review-form__submit" type="submit">SUBMIT</button>
+
+                <p
+                  class="review-form__message"
+                  id="review-msg"
+                  role="alert"
+                  aria-live="polite"
+                ></p>
+
+              </form>
+            </div>
+
+          </div><!-- /.product-reviews -->
+        </div>
+
+        <!-- Shipping Policy panel -->
+        <div
+          class="product-tabs__panel product-tabs__panel--hidden"
+          role="tabpanel"
+          id="tab-shipping"
+          aria-labelledby="btn-shipping"
+        >
+          <p>All orders are processed within 1–2 business days. Orders are not shipped or delivered on weekends or holidays. If we are experiencing a high volume of orders, shipments may be delayed by a few days. Please allow additional days in transit for delivery. If there will be a significant delay in shipment of your order, we will contact you via email or telephone.</p>
+          <p>Shipping rates and delivery estimates vary depending on your location and the shipping method you choose at checkout. Free shipping is available for orders over $150. International shipping rates are calculated at checkout based on your destination and order weight.</p>
+          <p>You will receive a shipment confirmation email once your order has been shipped containing your tracking number(s). The tracking number will be active within 24 hours. Best Shop is not responsible for any customs and taxes applied to your order. All fees imposed during or after shipping are the responsibility of the customer.</p>
+        </div>
+
+      </section><!-- /.product-tabs -->
+
+      <!-- ══ YOU MAY ALSO LIKE ══ -->
+      <section class="product-also-like" aria-label="You may also like">
+
+        <div class="product-also-like__header">
+          <h2 class="product-also-like__title">You May Also Like</h2>
+          <div class="product-also-like__line" aria-hidden="true"></div>
+        </div>
+
+        <div
+          class="product-also-like__grid"
+          id="also-like-grid"
+          aria-live="polite"
+          aria-label="Related products"
+        >
+          <!-- Injected by product.ts -->
+        </div>
+
+      </section>
+
+    </div><!-- /.product-page__inner -->
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script type="module" src="../../dist/js/main.js"></script>
+  <script type="module" src="../../dist/js/product.js"></script>
+</body>
+</html>

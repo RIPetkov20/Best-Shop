@@ -1,0 +1,384 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ═══════════════════════════════════════════════════════════
+// CART PAGE
+// ═══════════════════════════════════════════════════════════
+
+$cart-header-bg:   rgba(80, 78, 74, 1);
+$cart-summary-bg:  rgba(80, 78, 74, 1);
+$cart-divider:     rgba(185, 39, 112, 0.6);
+$cart-row-divider: rgba(185, 39, 112, 1);
+$text-white:       $color-white;
+
+// ═══════════════════════════════════════════════════════════
+// HERO BANNER
+// ═══════════════════════════════════════════════════════════
+.cart-hero {
+  position: relative;
+  width: 100%;
+  height: 229px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cart-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cart-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.cart-hero__title {
+  position: relative;
+  z-index: 2;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 50px;
+  line-height: 1;
+  color: $text-white;
+  margin: 0;
+}
+
+// ═══════════════════════════════════════════════════════════
+// CART CONTENT
+// ═══════════════════════════════════════════════════════════
+.cart-content {
+  padding: 40px 0 80px;
+  background: $color-white;
+}
+
+.cart-content__inner {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: 0 $section-padding-x;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+// ═══════════════════════════════════════════════════════════
+// CART TABLE
+// ═══════════════════════════════════════════════════════════
+.cart-table-wrap {
+  width: 100%;
+  overflow-x: auto;          // allows horizontal scroll on very small screens
+}
+
+// ─── Header row ───────────────────────────────────────────
+.cart-table__head {
+  display: grid;
+  grid-template-columns: 160px 1fr 120px 140px 120px 80px;
+  align-items: center;
+  background: $cart-header-bg;
+  padding: 19px 40px;
+  gap: 16px;
+  min-width: 700px;
+}
+
+.cart-table__col {
+  font-family: $font-secondary;
+  font-weight: $font-weight-bold;
+  font-size: 18px;
+  line-height: 1;
+  color: $text-white;
+
+  &--image  { text-align: left; }
+  &--name   { text-align: left; }
+  &--price  { text-align: center; }
+  &--qty    { text-align: center; }
+  &--total  { text-align: center; }
+  &--delete { text-align: center; }
+}
+
+// ─── Table body ───────────────────────────────────────────
+.cart-table__body {
+  display: flex;
+  flex-direction: column;
+}
+
+// Single cart row
+.cart-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 120px 140px 120px 80px;
+  align-items: center;
+  padding: 16px 40px;
+  gap: 16px;
+  border-bottom: 2px solid $cart-row-divider;
+  min-width: 700px;
+}
+
+// Product image: 120×120px
+.cart-row__img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+  background: rgba(245, 245, 245, 1);
+}
+
+// Product name: 18px bold
+.cart-row__name {
+  font-family: $font-secondary;
+  font-weight: $font-weight-bold;
+  font-size: 18px;
+  line-height: 1.3;
+  color: $color-black;
+}
+
+// Price / Total: 17px bold Montserrat
+.cart-row__price,
+.cart-row__total {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 17px;
+  color: $color-black;
+  text-align: center;
+}
+
+// Quantity control: − N +
+.cart-row__qty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cart-qty__btn {
+  background: none;
+  border: none;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 34px;
+  line-height: 1;
+  color: $color-black;
+  cursor: pointer;
+  width: 24px;
+  text-align: center;
+  padding: 0;
+  transition: color $transition-fast;
+
+  &:hover { color: $color-primary; }
+}
+
+.cart-qty__value {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 25px;
+  color: $color-black;
+  min-width: 24px;
+  text-align: center;
+  user-select: none;
+}
+
+// Delete button
+.cart-row__delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: $color-primary;
+  transition: opacity $transition-fast;
+
+  &:hover { opacity: 0.7; }
+
+  svg {
+    width: 18px;
+    height: 20px;
+    stroke: $color-primary;
+    fill: none;
+    stroke-width: 2;
+  }
+}
+
+// ─── Empty / Thank you states ─────────────────────────────
+.cart-empty,
+.cart-thankyou {
+  padding: 60px 40px;
+  text-align: center;
+
+  &[hidden] { display: none; }
+}
+
+.cart-empty__text,
+.cart-thankyou__text {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 20px;
+  color: $color-black;
+  margin: 0;
+
+  a {
+    color: $color-primary;
+    text-decoration: underline;
+    &:hover { opacity: 0.8; }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// BOTTOM ROW  –  buttons left | checkout right
+// ═══════════════════════════════════════════════════════════
+.cart-bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+// ─── Action buttons ───────────────────────────────────────
+.cart-actions {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+// Both buttons: 224×60px, pink, 15px bold white
+.cart-actions__btn {
+  width: 224px;
+  height: 60px;
+  background: $color-primary;
+  color: $text-white;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  transition: background-color $transition-fast;
+
+  &:hover         { background: darken(#B92770, 8%); }
+  &:focus-visible { @include focus-ring; }
+}
+
+// ─── Checkout summary: dark bg, 571px wide ────────────────
+.cart-summary {
+  width: 571px;
+  background: $cart-summary-bg;
+  padding: 32px 42px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+// Each summary row: label left, value right
+.cart-summary__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+
+  &--total { padding-top: 20px; }
+}
+
+.cart-summary__label {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 17px;
+  color: $text-white;
+
+  &--total { font-size: 20px; }
+}
+
+.cart-summary__value {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 17px;
+  color: $text-white;
+
+  &--total { font-size: 20px; }
+}
+
+// Pink divider lines (opacity 0.6)
+.cart-summary__divider {
+  height: 2px;
+  background: $cart-divider;
+  width: 100%;
+
+  &[hidden] { display: none; }
+}
+
+// Discount row — hidden until total > $3000
+.cart-summary__row--discount {
+  &[hidden] { display: none; }
+}
+
+// Checkout button: 229×42px, pink
+.cart-summary__checkout-btn {
+  width: 229px;
+  height: 42px;
+  background: $color-primary;
+  color: $text-white;
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  margin-top: 28px;
+  transition: background-color $transition-fast;
+
+  &:hover         { background: darken(#B92770, 8%); }
+  &:focus-visible { @include focus-ring; }
+}
+
+// ═══════════════════════════════════════════════════════════
+// RESPONSIVE
+// ═══════════════════════════════════════════════════════════
+@include tablet {
+  .cart-table__head,
+  .cart-row {
+    grid-template-columns: 100px 1fr 100px 120px 100px 60px;
+    padding: 12px 20px;
+  }
+
+  .cart-row__img { width: 90px; height: 90px; }
+
+  .cart-bottom { flex-direction: column; align-items: stretch; }
+
+  .cart-summary { width: 100%; max-width: 571px; }
+}
+
+@include mobile {
+  .cart-hero          { height: 160px; }
+  .cart-hero__title   { font-size: 34px; }
+
+  .cart-content { padding: 24px 0 48px; }
+  .cart-content__inner { padding: 0 16px; gap: 28px; }
+
+  .cart-table__head,
+  .cart-row {
+    grid-template-columns: 70px 1fr 80px 100px 80px 48px;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .cart-table__col { font-size: 13px; }
+  .cart-row__img   { width: 70px; height: 70px; }
+  .cart-row__name  { font-size: 13px; }
+
+  .cart-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .cart-actions__btn { width: 100%; }
+
+  .cart-summary { padding: 24px 20px 28px; }
+}
