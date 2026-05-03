@@ -4,15 +4,8 @@
 
 import { Product, getCart, addToCart, updateCartBadges } from './cart.js';
 
-// Extended interface for the product page (description is optional)
-interface ProductDetail extends Product {
-  description1?: string;
-  description2?: string;
-  images?: string[]; // additional thumbnail images
-}
-
-// ── State
-let currentProduct: ProductDetail | null = null;
+// ─── State ────────────────────────────────────────────────
+let currentProduct: Product | null = null;
 let quantity = 1;
 let selectedRating = 0;
 
@@ -20,216 +13,149 @@ let selectedRating = 0;
 // INIT
 // ═══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
-  void loadProduct();
   updateCartBadges(getCart().length);
+  void init();
 });
 
-// ═══════════════════════════════════════════════════════════
-// LOAD & RENDER PRODUCT
-// ═══════════════════════════════════════════════════════════
-async function loadProduct(): Promise<void> {
-  const id = getProductIdFromURL();
-
-  if (!id) {
-    showErrorState('No product ID provided.');
-    return;
-  }
+async function init(): Promise<void> {
+  const id = getProductIdFromUrl();
 
   try {
     const res  = await fetch('../assets/data.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = (await res.json()) as { data: ProductDetail[] };
+    const json = (await res.json()) as { data: Product[] };
+    const all  = json.data;
 
-    const product = json.data.find(p => p.id === id);
-    if (!product) {
-      showErrorState(`Product with ID "${id}" not found.`);
-      return;
+    const product = id ? all.find(p => p.id === id) : null;
+
+    if (product) {
+      currentProduct = product;
+      renderProduct(product);
+      renderAlsoLike(all, product.id);
+    } else {
+      // Fallback: show first product
+      currentProduct = all[0] ?? null;
+      if (currentProduct) {
+        renderProduct(currentProduct);
+        renderAlsoLike(all, currentProduct.id);
+      }
     }
 
-    currentProduct = product;
-
-    renderProductInfo(product);
-    renderGallery(product);
-    renderSelectors(product);
-    renderAlsoLike(json.data, product.id);
-    initQuantitySelector();
+    initQuantity();
     initAddToCart();
     initTabs();
     initReviewForm();
     initStarRating();
-    initReviewsTab(product);
 
   } catch (err) {
-    console.error('product.ts: failed to load product', err);
-    showErrorState('Could not load product data.');
+    console.error('Product page: failed to load data', err);
   }
 }
 
-// ── Read ?id= from URL
-function getProductIdFromURL(): string | null {
+// ─── Get ?id= from URL ────────────────────────────────────
+function getProductIdFromUrl(): string | null {
   const params = new URLSearchParams(window.location.search);
   return params.get('id');
 }
 
-// ── Render name / stars / price / descriptions
-function renderProductInfo(product: ProductDetail): void {
-  document.title = `${product.name} – Best Shop`;
+// ═══════════════════════════════════════════════════════════
+// RENDER PRODUCT
+// ═══════════════════════════════════════════════════════════
+function renderProduct(product: Product): void {
+  const category = product.category.toLowerCase();
+  const folder = category.includes('suitcases') ? 'homepage' : 'catalog';
+  
+  // Construct the path relative to the HTML location
+  const imgSrc = `../assets/images/${folder}/${product.imageUrl}`;
 
-  const name = document.getElementById('product-name');
-  if (name) name.textContent = product.name;
+  // Main image
+  const mainImg = document.getElementById('product-main-img') as HTMLImageElement;
+  if (mainImg) { mainImg.src = imgSrc; mainImg.alt = product.name; }
 
-  const price = document.getElementById('product-price');
-  if (price) price.textContent = `$${product.price}`;
+  // Thumbnails — reuse same image 4 times (no extra images in JSON)
+  const thumbsEl = document.getElementById('product-thumbs');
+  if (thumbsEl) {
+    thumbsEl.innerHTML = [imgSrc, imgSrc, imgSrc, imgSrc].map((src, i) => `
+      <img class="product-thumb${i === 0 ? ' is-active' : ''}"
+           src="${src}" alt="${product.name} view ${i + 1}"
+           loading="lazy" onerror="this.style.display='none'" />
+    `).join('');
 
-  // Stars (rating out of 5)
-  const starsEl = document.getElementById('product-stars');
-  if (starsEl) {
-    starsEl.innerHTML = buildStars(product.rating);
-    starsEl.setAttribute('aria-label', `${product.rating} out of 5 stars`);
+    // Thumb click → swap main image (same image in this case)
+    thumbsEl.querySelectorAll<HTMLImageElement>('.product-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        thumbsEl.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('is-active'));
+        thumb.classList.add('is-active');
+        if (mainImg) mainImg.src = thumb.src;
+      });
+    });
   }
 
-  // Review count – use static placeholder since JSON may not include it
-  const reviewCount = document.getElementById('product-review-count');
-  if (reviewCount) reviewCount.textContent = '(1 Clients Review)';
+  // Title
+  const titleEl = document.getElementById('product-title');
+  if (titleEl) titleEl.textContent = product.name;
 
-  // Descriptions – use product fields if available, else Figma placeholder text
-  const desc1Text = product.description1 ??
-    'The new product is a bold reimagining of travel essentials, designed to elevate every journey. Made with at least 30% recycled materials, its lightweight yet impact-resistant shell combines eco-conscious innovation with rugged durability.';
+  // Stars
+  const starsEl = document.getElementById('product-stars');
+  if (starsEl) starsEl.innerHTML = buildStars(product.rating);
 
-  const desc2Text = product.description2 ??
-    'The ergonomic handle and spinner wheels ensure effortless mobility while making a statement in sleek design. Inside, the modular compartments and adjustable straps keep your belongings secure and neatly organized, no matter the destination.';
+  // Review count
+  const countEl = document.getElementById('product-review-count');
+  if (countEl) countEl.textContent = '(1 Clients Review)';
 
-  const desc1 = document.getElementById('product-desc1');
-  const desc2 = document.getElementById('product-desc2');
-  if (desc1) desc1.textContent = desc1Text;
-  if (desc2) desc2.textContent = desc2Text;
+  // Price
+  const priceEl = document.getElementById('product-price');
+  if (priceEl) priceEl.textContent = `$${product.price}`;
 
-  // Update reviews title
-  const reviewTitle = document.getElementById('reviews-count-title');
-  if (reviewTitle) reviewTitle.textContent = `1 new review for ${product.name}`;
+  // Set selects to product's values
+  setSelectValue('select-size',     product.size);
+  setSelectValue('select-color',    product.color);
+  setSelectValue('select-category', product.category);
+
+  // Reviews tab heading
+  const reviewNameEl = document.getElementById('reviews-product-name');
+  if (reviewNameEl) reviewNameEl.textContent = product.name;
+
+  // Page title
+  document.title = `${product.name} – Best Shop`;
 }
 
-// ── Build filled/empty star HTML
+function setSelectValue(id: string, value: string): void {
+  const el = document.getElementById(id) as HTMLSelectElement | null;
+  if (!el) return;
+  const opt = Array.from(el.options).find(o =>
+    o.value.toLowerCase() === value.toLowerCase()
+  );
+  if (opt) el.value = opt.value;
+}
+
+// ─── Build star SVGs ──────────────────────────────────────
 function buildStars(rating: number): string {
-  const rounded = Math.round(rating);
+  const full  = `<svg viewBox="0 0 12 12" fill="rgba(245,180,35,1)" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.5,4.5 11,5 8.5,7.5 9,11 6,9.5 3,11 3.5,7.5 1,5 4.5,4.5"/></svg>`;
+  const empty = `<svg viewBox="0 0 12 12" fill="rgba(233,233,237,1)" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.5,4.5 11,5 8.5,7.5 9,11 6,9.5 3,11 3.5,7.5 1,5 4.5,4.5"/></svg>`;
   return Array.from({ length: 5 }, (_, i) =>
-    `<span class="product-star${i < rounded ? ' product-star--filled' : ''}">★</span>`
+    i < Math.round(rating) ? full : empty
   ).join('');
 }
 
 // ═══════════════════════════════════════════════════════════
-// GALLERY  –  main image + 4 thumbnails
+// QUANTITY SELECTOR
 // ═══════════════════════════════════════════════════════════
-function renderGallery(product: ProductDetail): void {
-  const mainImg = document.getElementById('product-main-img') as HTMLImageElement | null;
-  const thumbsContainer = document.getElementById('product-thumbs');
-  if (!mainImg || !thumbsContainer) return;
- 
-  // Resolve image path – products may be in catalog or homepage subfolders
-  const resolveImg = (url: string): string => {
-    if (url.startsWith('http') || url.startsWith('/')) return url;
-    // Try catalog folder first, fall back to homepage folder
-    return `../assets/images/catalog/${url}`;
-  };
- 
-  // Build a thumbnail array – use product.images if available,
-  // otherwise repeat the main image for 4 thumbs (Figma shows 4 thumbnails)
-  const images: string[] = product.images?.length
-    ? product.images
-    : [product.imageUrl, product.imageUrl, product.imageUrl, product.imageUrl];
- 
-  const primarySrc = resolveImg(images[0]);
-  mainImg.src = primarySrc;
-  mainImg.alt = product.name;
- 
-  // Fallback for broken images
-  mainImg.onerror = () => {
-    mainImg.src = `../assets/images/homepage/${product.imageUrl}`;
-  };
- 
-  // Render thumbnails
-  thumbsContainer.innerHTML = images.slice(0, 4).map((url, idx) => {
-    const src = resolveImg(url);
-    const isActive = idx === 0 ? ' product-gallery__thumb--active' : '';
-    return `
-      <button
-        class="product-gallery__thumb${isActive}"
-        data-src="${src}"
-        data-idx="${idx}"
-        role="listitem"
-        aria-label="View image ${idx + 1} of ${Math.min(images.length, 4)}"
-        aria-pressed="${idx === 0}"
-        type="button"
-      >
-        <img
-          src="${src}"
-          alt="${product.name} – view ${idx + 1}"
-          loading="lazy"
-          onerror="this.closest('button').style.opacity='0.4'"
-        />
-      </button>
-    `;
-  }).join('');
- 
-  // Thumbnail click → update main image
-  thumbsContainer.querySelectorAll<HTMLButtonElement>('.product-gallery__thumb').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const src = btn.dataset['src'];
-      if (!src) return;
- 
-      mainImg.src = src;
- 
-      // Update active state
-      thumbsContainer.querySelectorAll<HTMLButtonElement>('.product-gallery__thumb').forEach(b => {
-        b.classList.remove('product-gallery__thumb--active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.add('product-gallery__thumb--active');
-      btn.setAttribute('aria-pressed', 'true');
-    });
-  });
-}
-// ═══════════════════════════════════════════════════════════
-// SELECTORS  –  pre-select size, color, category from product
-// ═══════════════════════════════════════════════════════════
-function renderSelectors(product: ProductDetail): void {
-  const sizeSelect     = document.getElementById('sel-size')     as HTMLSelectElement | null;
-  const colorSelect    = document.getElementById('sel-color')    as HTMLSelectElement | null;
-  const categorySelect = document.getElementById('sel-category') as HTMLSelectElement | null;
+function initQuantity(): void {
+  const minusBtn  = document.getElementById('qty-minus');
+  const plusBtn   = document.getElementById('qty-plus');
+  const valueEl   = document.getElementById('qty-value');
 
-  if (sizeSelect     && product.size)     sizeSelect.value     = product.size;
-  if (colorSelect    && product.color)    colorSelect.value    = product.color;
-  if (categorySelect && product.category) categorySelect.value = product.category;
-}
-
-// ═══════════════════════════════════════════════════════════
-// QUANTITY SELECTOR  –  min = 1
-// ═══════════════════════════════════════════════════════════
-function initQuantitySelector(): void {
-  const minusBtn  = document.getElementById('qty-minus')  as HTMLButtonElement | null;
-  const plusBtn   = document.getElementById('qty-plus')   as HTMLButtonElement | null;
-  const valueSpan = document.getElementById('qty-value');
-
-  if (!minusBtn || !plusBtn || !valueSpan) return;
-
-  const updateDisplay = (): void => {
-    valueSpan.textContent = String(quantity);
-    minusBtn.disabled = quantity <= 1;
-    minusBtn.setAttribute('aria-disabled', String(quantity <= 1));
+  const update = (): void => {
+    if (valueEl) valueEl.textContent = String(quantity);
   };
 
-  updateDisplay();
-
-  minusBtn.addEventListener('click', () => {
-    if (quantity > 1) {
-      quantity--;
-      updateDisplay();
-    }
+  minusBtn?.addEventListener('click', () => {
+    if (quantity > 1) { quantity--; update(); }
   });
 
-  plusBtn.addEventListener('click', () => {
+  plusBtn?.addEventListener('click', () => {
     quantity++;
-    updateDisplay();
+    update();
   });
 }
 
@@ -237,227 +163,183 @@ function initQuantitySelector(): void {
 // ADD TO CART
 // ═══════════════════════════════════════════════════════════
 function initAddToCart(): void {
-  const btn = document.getElementById('add-to-cart-btn') as HTMLButtonElement | null;
-  if (!btn) return;
-
-  btn.addEventListener('click', () => {
+  const btn = document.getElementById('add-to-cart-btn');
+  btn?.addEventListener('click', () => {
     if (!currentProduct) return;
-
-    // Add one entry per unit of quantity
+    // Add `quantity` copies
     for (let i = 0; i < quantity; i++) {
       addToCart(currentProduct);
     }
-
-    // Visual feedback
-    const original = btn.textContent;
-    btn.textContent = '✓ Added!';
-    btn.style.background = '#28a745';
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-    }, 1500);
   });
 }
 
 // ═══════════════════════════════════════════════════════════
-// TABS  –  Details | Reviews | Shipping Policy
+// TABS
 // ═══════════════════════════════════════════════════════════
 function initTabs(): void {
-  const tabBtns    = document.querySelectorAll<HTMLButtonElement>('.product-tabs__tab');
-  const tabPanels  = document.querySelectorAll<HTMLElement>('.product-tabs__panel');
+  const tabs   = document.querySelectorAll<HTMLButtonElement>('.product-tabs__tab');
+  const panels = document.querySelectorAll<HTMLElement>('.product-tabs__panel');
 
-  if (!tabBtns.length || !tabPanels.length) return;
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset['tab'];
 
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset['tab'];
-
-      // Deactivate all
-      tabBtns.forEach(b => {
-        b.classList.remove('product-tabs__tab--active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      tabPanels.forEach(p => {
-        p.classList.add('product-tabs__panel--hidden');
-        p.hidden = true;
+      // Update tabs
+      tabs.forEach(t => {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', String(t === tab));
       });
 
-      // Activate selected
-      btn.classList.add('product-tabs__tab--active');
-      btn.setAttribute('aria-selected', 'true');
-      const panel = document.getElementById(`tab-${target}`);
-      if (panel) {
-        panel.classList.remove('product-tabs__panel--hidden');
-        panel.hidden = false;
-      }
-    });
-
-    // Keyboard navigation (arrow keys)
-    btn.addEventListener('keydown', (e: KeyboardEvent) => {
-      const btnsArr = Array.from(tabBtns);
-      const idx     = btnsArr.indexOf(btn);
-
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        const next = btnsArr[(idx + 1) % btnsArr.length];
-        next.focus();
-        next.click();
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        const prev = btnsArr[(idx - 1 + btnsArr.length) % btnsArr.length];
-        prev.focus();
-        prev.click();
-      }
+      // Update panels
+      panels.forEach(panel => {
+        const isTarget = panel.id === `tab-${target}`;
+        panel.classList.toggle('is-hidden', !isTarget);
+      });
     });
   });
-
-  // Show first tab panel by default (remove hidden)
-  const firstPanel = tabPanels[0];
-  if (firstPanel) {
-    firstPanel.classList.remove('product-tabs__panel--hidden');
-    firstPanel.hidden = false;
-  }
 }
 
 // ═══════════════════════════════════════════════════════════
-// STAR RATING (review form)
+// STAR RATING INPUT (interactive)
 // ═══════════════════════════════════════════════════════════
 function initStarRating(): void {
-  const container = document.getElementById('rate-stars');
+  const container = document.getElementById('rating-stars');
   if (!container) return;
 
-  const stars = Array.from(container.querySelectorAll<HTMLButtonElement>('.rate-star'));
+  const starBtns = container.querySelectorAll<HTMLButtonElement>('.review-star-btn');
 
-  const highlight = (value: number): void => {
-    stars.forEach((s, i) => {
-      s.style.color = i < value
-        ? 'rgba(245, 180, 35, 1)'
-        : 'rgba(233, 233, 237, 1)';
+  const highlightUpTo = (n: number): void => {
+    starBtns.forEach((btn, i) => {
+      btn.classList.toggle('is-filled', i < n);
     });
   };
 
-  stars.forEach((star, idx) => {
-    // Hover
-    star.addEventListener('mouseenter', () => highlight(idx + 1));
-    star.addEventListener('mouseleave', () => highlight(selectedRating));
-
-    // Click
-    star.addEventListener('click', () => {
+  starBtns.forEach((btn, idx) => {
+    btn.addEventListener('mouseenter', () => highlightUpTo(idx + 1));
+    btn.addEventListener('mouseleave', () => highlightUpTo(selectedRating));
+    btn.addEventListener('click', () => {
       selectedRating = idx + 1;
-      highlight(selectedRating);
-      star.setAttribute('aria-pressed', 'true');
-      container.setAttribute('aria-label', `Rated ${selectedRating} out of 5`);
+      highlightUpTo(selectedRating);
     });
   });
-
-  // Start with empty stars
-  highlight(0);
 }
 
 // ═══════════════════════════════════════════════════════════
-// REVIEW FORM  –  validation + submit
+// REVIEW FORM  –  submit without reload
 // ═══════════════════════════════════════════════════════════
 function initReviewForm(): void {
-  const form    = document.getElementById('review-form')   as HTMLFormElement | null;
-  const msgEl   = document.getElementById('review-msg');
-  if (!form || !msgEl) return;
+  const form    = document.getElementById('review-form') as HTMLFormElement | null;
+  const msgEl   = document.getElementById('review-message');
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  form.addEventListener('submit', (e: SubmitEvent) => {
+  form?.addEventListener('submit', (e: Event) => {
     e.preventDefault();
 
-    const reviewText  = (document.getElementById('review-text')  as HTMLTextAreaElement).value.trim();
-    const reviewName  = (document.getElementById('review-name')  as HTMLInputElement).value.trim();
-    const reviewEmail = (document.getElementById('review-email') as HTMLInputElement).value.trim();
+    const text  = (document.getElementById('review-text')  as HTMLTextAreaElement).value.trim();
+    const name  = (document.getElementById('review-name')  as HTMLInputElement).value.trim();
+    const email = (document.getElementById('review-email') as HTMLInputElement).value.trim();
 
-    // Validation
-    if (!reviewText) {
-      showFormMsg(msgEl, 'Please write your review.', 'error');
-      return;
-    }
-    if (!reviewName) {
-      showFormMsg(msgEl, 'Please enter your name.', 'error');
-      return;
-    }
-    if (!reviewEmail || !emailRegex.test(reviewEmail)) {
-      showFormMsg(msgEl, 'Please enter a valid email address.', 'error');
-      return;
-    }
-    if (selectedRating === 0) {
-      showFormMsg(msgEl, 'Please rate the product.', 'error');
+    // Basic validation
+    if (!text || !name || !email) {
+      showMessage(msgEl, 'Please fill in all required fields.', 'error');
       return;
     }
 
-    // Success
-    showFormMsg(msgEl, 'Thank you! Your review has been submitted.', 'success');
+    if (!selectedRating) {
+      showMessage(msgEl, 'Please select a star rating.', 'error');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showMessage(msgEl, 'Please enter a valid email address.', 'error');
+      return;
+    }
+
+    // Success — add review to the list
+    addReviewToList(name, text, selectedRating);
     form.reset();
     selectedRating = 0;
-
-    // Reset star display
-    const container = document.getElementById('rate-stars');
-    if (container) {
-      container.querySelectorAll<HTMLButtonElement>('.rate-star').forEach(s => {
-        s.style.color = 'rgba(233, 233, 237, 1)';
-      });
-    }
+    // Reset star visuals
+    document.querySelectorAll('.review-star-btn').forEach(btn =>
+      btn.classList.remove('is-filled')
+    );
+    showMessage(msgEl, 'Thank you! Your review has been submitted.', 'success');
   });
 }
 
-function showFormMsg(el: HTMLElement, text: string, type: 'success' | 'error'): void {
+function showMessage(
+  el: HTMLElement | null,
+  text: string,
+  type: 'success' | 'error'
+): void {
+  if (!el) return;
   el.textContent = text;
   el.className = `review-form__message review-form__message--${type}`;
-  // Auto-clear after 5 s
+  el.removeAttribute('hidden');
+
+  // Auto-hide after 5 seconds
   setTimeout(() => {
-    el.textContent = '';
-    el.className = 'review-form__message';
+    el.setAttribute('hidden', '');
   }, 5000);
 }
 
-// ═══════════════════════════════════════════════════════════
-// REVIEWS TAB  –  update count title with real product name
-// ═══════════════════════════════════════════════════════════
-function initReviewsTab(product: ProductDetail): void {
-  const title = document.getElementById('reviews-count-title');
-  if (title) title.textContent = `1 new review for ${product.name}`;
+function addReviewToList(name: string, text: string, rating: number): void {
+  const list = document.getElementById('reviews-list');
+  if (!list) return;
+
+  const today = new Date().toLocaleDateString('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric'
+  });
+
+  const stars = Array.from({ length: 5 }, (_, i) =>
+    `<svg viewBox="0 0 12 12" fill="${i < rating ? 'rgba(245,180,35,1)' : 'rgba(233,233,237,1)'}" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.5,4.5 11,5 8.5,7.5 9,11 6,9.5 3,11 3.5,7.5 1,5 4.5,4.5"/></svg>`
+  ).join('');
+
+  const item = document.createElement('div');
+  item.className = 'review-item';
+  item.innerHTML = `
+    <div class="review-item__header">
+      <div class="review-item__meta">
+        <span class="review-item__name">${name}</span>
+        <span class="review-item__date">/ ${today}</span>
+      </div>
+      <div class="review-item__stars">${stars}</div>
+    </div>
+    <p class="review-item__text">${text}</p>
+  `;
+  list.appendChild(item);
+
+  // Update review count heading
+  const count = list.querySelectorAll('.review-item').length;
+  const heading = document.getElementById('reviews-heading');
+  const productName = document.getElementById('reviews-product-name')?.textContent ?? 'this product';
+  if (heading) heading.innerHTML = `${count} review${count > 1 ? 's' : ''} for <span id="reviews-product-name">${productName}</span>`;
 }
 
 // ═══════════════════════════════════════════════════════════
 // YOU MAY ALSO LIKE  –  4 random products (excluding current)
 // ═══════════════════════════════════════════════════════════
-function renderAlsoLike(allProducts: ProductDetail[], currentId: string): void {
+function renderAlsoLike(all: Product[], currentId: string): void {
   const grid = document.getElementById('also-like-grid');
   if (!grid) return;
 
-  // Filter out current product, shuffle, take 4
-  const pool = allProducts.filter(p => p.id !== currentId);
-  const picked = shuffle(pool).slice(0, 4);
+  const pool = all
+    .filter(p => p.id !== currentId)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
 
-  if (picked.length === 0) {
-    grid.innerHTML = '<p style="text-align:center;padding:20px;color:#888;">No related products found.</p>';
-    return;
-  }
+  grid.innerHTML = pool.map(p => buildAlsoLikeCard(p)).join('');
 
-  grid.innerHTML = picked.map(p => buildAlsoLikeCard(p)).join('');
-
-  // Add to cart on button click
-  grid.querySelectorAll<HTMLButtonElement>('.also-like-card__btn').forEach(btn => {
-    btn.addEventListener('click', (e: MouseEvent) => {
+  grid.querySelectorAll<HTMLButtonElement>('.product-card__btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const id = (btn.closest('[data-product-id]') as HTMLElement | null)?.dataset['productId'];
-      const product = picked.find(p => p.id === id);
-      if (product) {
-        addToCart(product);
-        // Quick feedback
-        const orig = btn.textContent;
-        btn.textContent = '✓ Added';
-        setTimeout(() => { btn.textContent = orig; }, 1200);
-      }
+      const id = btn.closest<HTMLElement>('[data-product-id]')?.dataset['productId'];
+      const product = all.find(p => p.id === id);
+      if (product) addToCart(product);
     });
   });
 
-  // Card click → navigate to that product page
-  grid.querySelectorAll<HTMLElement>('.also-like-card').forEach(card => {
+  grid.querySelectorAll<HTMLElement>('.product-card').forEach(card => {
     card.addEventListener('click', () => {
       const id = card.dataset['productId'];
       if (id) window.location.href = `/src/html/product-details.html?id=${id}`;
@@ -465,71 +347,27 @@ function renderAlsoLike(allProducts: ProductDetail[], currentId: string): void {
   });
 }
 
-function buildAlsoLikeCard(product: ProductDetail): string {
-  const badge = product.salesStatus
-    ? `<div class="also-like-card__badge" aria-label="Sale">SALE</div>`
-    : '';
-
-  // Resolve image – try catalog, fallback to homepage
-  const imgSrc = `../assets/images/catalog/${product.imageUrl}`;
-  const imgFallback = `../assets/images/homepage/${product.imageUrl}`;
+function buildAlsoLikeCard(product: Product): string {
+  const badge  = product.salesStatus
+    ? `<div class="product-card__badge" aria-label="Sale"><span>SALE</span></div>` : '';
+  const category = product.category.toLowerCase();
+  const folder = category.includes('suitcases') ? 'homepage' : 'catalog';
+  
+  // Construct the path relative to the HTML location
+  const imgSrc = `../assets/images/${folder}/${product.imageUrl}`;
 
   return `
-    <article
-      class="also-like-card"
-      data-product-id="${product.id}"
-      aria-label="${product.name}"
-      tabindex="0"
-      role="button"
-    >
-      <div class="also-like-card__img-wrap">
+    <article class="product-card" data-product-id="${product.id}"
+             aria-label="${product.name}" tabindex="0">
+      <div class="product-card__img-wrap">
         ${badge}
-        <img
-          class="also-like-card__img"
-          src="${imgSrc}"
-          alt="${product.name}"
-          loading="lazy"
-          onerror="this.src='${imgFallback}'"
-        />
+        <img class="product-card__img" src="${imgSrc}" alt="${product.name}"
+             loading="lazy" onerror="this.style.display='none'" />
       </div>
-      <div class="also-like-card__body">
-        <h3 class="also-like-card__name">${product.name}</h3>
-        <p class="also-like-card__price">$${product.price}</p>
-        <button class="also-like-card__btn" type="button" aria-label="Add ${product.name} to cart">
-          Add To Cart
-        </button>
+      <div class="product-card__body">
+        <h3 class="product-card__name">${product.name}</h3>
+        <p class="product-card__price">$${product.price}</p>
+        <button class="product-card__btn" type="button">Add To Cart</button>
       </div>
-    </article>
-  `;
-}
-
-// ═══════════════════════════════════════════════════════════
-// UTILITIES
-// ═══════════════════════════════════════════════════════════
-
-// Fisher-Yates shuffle
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function showErrorState(msg: string): void {
-  const main = document.getElementById('main-content');
-  if (main) {
-    main.innerHTML = `
-      <div style="text-align:center;padding:80px 20px;font-family:Montserrat,sans-serif;">
-        <p style="font-size:18px;color:#888;">${msg}</p>
-        <a href="/src/html/catalog.html"
-           style="display:inline-block;margin-top:20px;padding:12px 32px;
-                  background:rgba(185,39,112,1);color:#fff;text-decoration:none;
-                  font-weight:700;font-family:Montserrat,sans-serif;">
-          Back to Catalog
-        </a>
-      </div>
-    `;
-  }
+    </article>`;
 }
