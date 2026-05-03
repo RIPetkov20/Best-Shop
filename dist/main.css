@@ -2785,8 +2785,9 @@ select {
 .catalog-toolbar__right {
   display: flex;
   align-items: center;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 15px;
+  justify-content: flex-end;
 }
 
 .catalog-toolbar__results {
@@ -2797,14 +2798,6 @@ select {
   white-space: nowrap;
   margin: 0;
   flex-shrink: 0;
-}
-
-.catalog-toolbar__right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 .catalog-filters-toggle {

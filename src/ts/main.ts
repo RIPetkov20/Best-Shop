@@ -99,7 +99,7 @@ function initHamburger(): void {
 // ACTIVE NAV LINK  (matches current page filename)
 // ───────────────────────────────────────────────────────────
 function setActiveNavLink(): void {
-  const filename = window.location.pathname.split('/').pop() || 'index.html';
+  const filename = window.location.pathname.split('/').pop() ?? 'index.html';
 
   const pageMap: Record<string, string> = {
     'index.html': 'home',

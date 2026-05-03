@@ -38,11 +38,12 @@
   gap: 15px;
 
   &__right {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap; // Essential for responsive
-    gap: 15px;
-  }
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 }
 
 .catalog-toolbar__results {
@@ -53,14 +54,6 @@
   white-space: nowrap;
   margin: 0;
   flex-shrink: 0;
-}
-
-.catalog-toolbar__right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 // ─── Filters toggle button ────────────────────────────────
@@ -200,8 +193,6 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   &[hidden] { display: none; }
 }
 
-// Filter selects row — 4 groups side by side
-// Figma: groups start at left offsets 8, 334, 658, 989 within the box (relative)
 .catalog-filter-panel__row {
   display: flex;
   align-items: flex-start;
