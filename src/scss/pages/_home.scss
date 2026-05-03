@@ -687,16 +687,6 @@
   }
 }
 
-// Background
-.promo-banner__bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-}
-
 .promo-banner__overlay {
   position: absolute;
   inset: 0;
@@ -788,9 +778,12 @@
 
 // 3. CROSS-BROWSER FIX (Firefox/Safari)
 .promo-banner__bg {
-  // Ensures background covers fully even if height changes
-  min-width: 100%;
-  min-height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
 // --------------- New Products arrival ------------------

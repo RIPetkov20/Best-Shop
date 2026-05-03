@@ -188,7 +188,6 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
 
 // The bordered box — contains selects + divider + buttons
 .catalog-filter-panel__body {
-  // border: 2px solid $color-primary;
   background: $color-white;
   &[hidden] { display: none; }
 }
@@ -413,19 +412,12 @@ grid-column: 1 / 2; // Only spans the products column to prevent widening
   padding-left: 20px;
 
   &__title {
-    margin-top: 0; // Remove top margin so it aligns perfectly with the first card
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 24px;
-  }
-}
-
-.catalog-sidebar__title {
-  font-family: $font-primary;
-  font-weight: $font-weight-bold;
-  font-size: 17px;
-  color: $color-black;
-  margin: 0 0 24px;
+    font-family: $font-primary;
+    font-weight: $font-weight-bold;
+    font-size: 17px;
+    color: $color-black;
+    margin: 0 0 24px;
+    }
 }
 
 .catalog-sidebar__list {
