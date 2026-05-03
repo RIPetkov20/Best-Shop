@@ -1,15 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 // HOME PAGE
 // ═══════════════════════════════════════════════════════════
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { getCart, addToCart, updateCartBadges } from './cart.js';
 // ═══════════════════════════════════════════════════════════
 // INIT
@@ -34,52 +25,50 @@ function initDiscountBtn() {
 // ───────────────────────────────────────────────────────────
 // SELECTED PRODUCTS  –  load from data.json, render cards
 // ───────────────────────────────────────────────────────────
-function loadSelectedProducts() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const grid = document.getElementById('selected-products-grid');
-        if (!grid)
+async function loadSelectedProducts() {
+    const grid = document.getElementById('selected-products-grid');
+    if (!grid)
+        return;
+    // Show loading state
+    grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Loading...</p>';
+    try {
+        // Path relative to the HTML file location (src/index.html)
+        const response = await fetch('assets/data.json');
+        if (!response.ok)
+            throw new Error(`HTTP ${response.status}`);
+        const json = (await response.json());
+        // Filter to only "Selected Products" block
+        const selected = json.data.filter(p => p.blocks.includes('Selected Products'));
+        if (selected.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;padding:40px;">No products found.</p>';
             return;
-        // Show loading state
-        grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Loading...</p>';
-        try {
-            // Path relative to the HTML file location (src/index.html)
-            const response = yield fetch('assets/data.json');
-            if (!response.ok)
-                throw new Error(`HTTP ${response.status}`);
-            const json = (yield response.json());
-            // Filter to only "Selected Products" block
-            const selected = json.data.filter(p => p.blocks.includes('Selected Products'));
-            if (selected.length === 0) {
-                grid.innerHTML = '<p style="text-align:center;padding:40px;">No products found.</p>';
-                return;
-            }
-            // Render cards
-            grid.innerHTML = selected.map(product => buildProductCard(product)).join('');
-            // Attach Add To Cart listeners
-            grid.querySelectorAll('.product-card__btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    var _a;
-                    e.stopPropagation(); // don't navigate to product page
-                    const id = (_a = btn.closest('[data-product-id]')) === null || _a === void 0 ? void 0 : _a.dataset['productId'];
-                    const product = selected.find(p => p.id === id);
-                    if (product)
-                        addToCart(product);
-                });
-            });
-            // Clicking the card itself → product details page
-            grid.querySelectorAll('.product-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const id = card.dataset['productId'];
-                    if (id)
-                        window.location.href = `/src/html/product-details.html?id=${id}`;
-                });
-            });
         }
-        catch (err) {
-            console.error('Failed to load products:', err);
-            grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Could not load products.</p>';
-        }
-    });
+        // Render cards
+        grid.innerHTML = selected.map(product => buildProductCard(product)).join('');
+        // Attach Add To Cart listeners
+        grid.querySelectorAll('.product-card__btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                var _a;
+                e.stopPropagation(); // don't navigate to product page
+                const id = (_a = btn.closest('[data-product-id]')) === null || _a === void 0 ? void 0 : _a.dataset['productId'];
+                const product = selected.find(p => p.id === id);
+                if (product)
+                    addToCart(product);
+            });
+        });
+        // Clicking the card itself → product details page
+        grid.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset['productId'];
+                if (id)
+                    window.location.href = `/src/html/product-details.html?id=${id}`;
+            });
+        });
+    }
+    catch (err) {
+        console.error('Failed to load products:', err);
+        grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Could not load products.</p>';
+    }
 }
 // ─── Build a single product card HTML string ──────────────
 function buildProductCard(product) {
@@ -118,38 +107,36 @@ function buildProductCard(product) {
 // ───────────────────────────────────────────────────────────
 // NEW PRODUCTS ARRIVAL  –  load from data.json, render cards
 // ───────────────────────────────────────────────────────────
-function loadNewProducts() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const grid = document.getElementById('new-products-grid');
-        if (!grid)
+async function loadNewProducts() {
+    const grid = document.getElementById('new-products-grid');
+    if (!grid)
+        return;
+    grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Loading...</p>';
+    try {
+        const response = await fetch('assets/data.json');
+        if (!response.ok)
+            throw new Error(`HTTP ${response.status}`);
+        const json = (await response.json());
+        const newProducts = json.data.filter(p => p.blocks.includes('New Products Arrival'));
+        if (newProducts.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;padding:40px;">No products found.</p>';
             return;
-        grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Loading...</p>';
-        try {
-            const response = yield fetch('assets/data.json');
-            if (!response.ok)
-                throw new Error(`HTTP ${response.status}`);
-            const json = (yield response.json());
-            const newProducts = json.data.filter(p => p.blocks.includes('New Products Arrival'));
-            if (newProducts.length === 0) {
-                grid.innerHTML = '<p style="text-align:center;padding:40px;">No products found.</p>';
-                return;
-            }
-            // "View Product" cards — clicking navigates to product details
-            grid.innerHTML = newProducts.map(p => buildViewProductCard(p)).join('');
-            // Entire card is clickable → product details
-            grid.querySelectorAll('.product-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const id = card.dataset['productId'];
-                    if (id)
-                        window.location.href = `/src/html/product-details.html?id=${id}`;
-                });
+        }
+        // "View Product" cards — clicking navigates to product details
+        grid.innerHTML = newProducts.map(p => buildViewProductCard(p)).join('');
+        // Entire card is clickable → product details
+        grid.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset['productId'];
+                if (id)
+                    window.location.href = `/src/html/product-details.html?id=${id}`;
             });
-        }
-        catch (err) {
-            console.error('Failed to load new products:', err);
-            grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Could not load products.</p>';
-        }
-    });
+        });
+    }
+    catch (err) {
+        console.error('Failed to load new products:', err);
+        grid.innerHTML = '<p style="text-align:center;padding:40px;color:#888;">Could not load products.</p>';
+    }
 }
 // ─── Product card with "View Product" button ──────────────
 function buildViewProductCard(product) {

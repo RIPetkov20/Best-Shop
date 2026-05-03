@@ -1,15 +1,7 @@
 // ═══════════════════════════════════════════════════════════
 // MAIN  –  loads header + footer partials, then inits UI
 // ═══════════════════════════════════════════════════════════
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+import { initLoginModal } from './loginModal.js';
 document.addEventListener('DOMContentLoaded', () => {
     // Load both partials in parallel, then init all UI features
     void Promise.all([loadPartial('header'), loadPartial('footer')]).then(() => {
@@ -17,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveNavLink();
         initCartCounter();
         initAccountModal();
+        initLoginModal();
     });
 });
 // ───────────────────────────────────────────────────────────
@@ -24,28 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // Resolves the correct relative path based on URL depth,
 // fetches the HTML partial, and replaces the placeholder.
 // ───────────────────────────────────────────────────────────
-function loadPartial(name) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const placeholder = document.getElementById(`${name}-placeholder`);
-        if (!placeholder)
-            return;
-        try {
-            // Depth: src/index.html = 2 segments → prefix ''
-            //        src/html/page.html = 3 segments → prefix '../'
-            const segments = window.location.pathname.split('/').filter(Boolean);
-            const prefix = segments.length <= 2 ? '' : '../';
-            const url = `${prefix}html/components/${name}.html`;
-            const response = yield fetch(url);
-            if (!response.ok)
-                throw new Error(`${name} fetch failed: ${response.status}`);
-            const html = yield response.text();
-            placeholder.outerHTML = html;
-        }
-        catch (err) {
-            console.error(`Could not load ${name} partial:`, err);
-            placeholder.remove();
-        }
-    });
+async function loadPartial(name) {
+    const placeholder = document.getElementById(`${name}-placeholder`);
+    if (!placeholder)
+        return;
+    try {
+        // Depth: src/index.html = 2 segments → prefix ''
+        //        src/html/page.html = 3 segments → prefix '../'
+        const segments = window.location.pathname.split('/').filter(Boolean);
+        const prefix = segments.length <= 2 ? '' : '../';
+        const url = `${prefix}html/components/${name}.html`;
+        const response = await fetch(url);
+        if (!response.ok)
+            throw new Error(`${name} fetch failed: ${response.status}`);
+        const html = await response.text();
+        placeholder.outerHTML = html;
+    }
+    catch (err) {
+        console.error(`Could not load ${name} partial:`, err);
+        placeholder.remove();
+    }
 }
 // ───────────────────────────────────────────────────────────
 // HAMBURGER / MOBILE MENU

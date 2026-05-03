@@ -1,0 +1,307 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ═══════════════════════════════════════════════════════════
+// LOGIN MODAL
+// ═══════════════════════════════════════════════════════════
+
+// ── Local tokens from Figma spec
+$modal-border-color:  rgba(185, 39, 112, 1);
+$modal-text-muted:    rgba(114, 113, 116, 1);
+$modal-field-border:  rgba(185, 39, 112, 1);
+$modal-width:         480px;
+$modal-height:        384px;
+
+// ── Backdrop
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  // Hidden state
+  &[hidden] {
+    display: none;
+  }
+
+  // Fade-in animation
+  &.is-visible {
+    animation: modal-fade-in 0.2s ease forwards;
+  }
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+// ── Modal box
+.login-modal {
+  position: relative;
+  width: $modal-width;
+  max-width: 100%;
+  background: $color-white;
+  padding: 44px 70px 40px;
+  box-sizing: border-box;
+
+  // Scale-up animation
+  animation: modal-scale-in 0.22s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+
+  @include mobile {
+    padding: 40px 24px 32px;
+  }
+}
+
+@keyframes modal-scale-in {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+// ── Close button (top-right ×)
+.login-modal__close {
+  @include button-reset;
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  color: $modal-text-muted;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// ── Form
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Field label
+.login-form__label {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 14px;
+  line-height: 1;
+  color: $color-black;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  // Required star
+  &-required {
+    color: $color-primary;
+    font-weight: $font-weight-bold;
+  }
+}
+
+// ── Input wrapper (relative for eye icon)
+.login-form__input-wrap {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px; // gap between email block and password label
+}
+
+// ── Text / email / password inputs
+.login-form__input {
+  width: 100%;
+  height: 40px;
+  border: 2px solid rgba($modal-field-border, 0.5);
+  background: $color-white;
+  padding: 0 14px;
+  box-sizing: border-box;
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 14px;
+  color: $color-black;
+  transition: border-color $transition-fast;
+
+  &::placeholder {
+    color: $modal-text-muted;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    outline: none;
+    border: 3px solid $modal-field-border;
+  }
+
+  // Make room for eye icon in password field
+  &--password {
+    padding-right: 44px;
+  }
+
+  // Error state
+  &.is-error {
+    border-color: #dc3545;
+    border: 3px solid rgba(255, 0, 0, 0.5);
+  }
+}
+
+// ── Eye toggle button
+.login-form__eye-btn {
+  @include button-reset;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $modal-text-muted;
+  transition: color $transition-fast;
+
+  svg {
+    width: 18px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+  }
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// ── Error message beneath a field
+.login-form__error {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 11px;
+  color: #dc3545;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  min-height: 14px;
+
+  &:empty {
+    display: none;
+  }
+}
+
+// ── Remember me + Forgot password row
+.login-form__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  margin-top: 10px;
+}
+
+.login-form__remember {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.login-form__checkbox {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border: 2px solid $modal-text-muted;
+  background: $color-white;
+  cursor: pointer;
+  accent-color: $color-primary;
+  opacity: 0.5;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.login-form__remember-label {
+  font-family: $font-primary;
+  font-weight: $font-weight-regular;
+  font-size: 9px;
+  line-height: 1;
+  color: $modal-text-muted;
+  cursor: pointer;
+  user-select: none;
+}
+
+.login-form__forgot {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  font-size: 9px;
+  line-height: 1;
+  color: $color-primary;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// ── Submit button
+.login-form__submit {
+  width: 100%;
+  height: 40px;
+  background: $color-primary;
+  color: $color-white;
+  border: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: $font-weight-bold;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(155, 30, 93, 1);
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+// ── General form message (success / error)
+.login-form__message {
+  font-family: $font-primary;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 12px;
+  min-height: 18px;
+
+  &--success { color: #28a745; }
+  &--error   { color: #dc3545; }
+
+  &:empty { display: none; }
+}

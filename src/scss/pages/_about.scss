@@ -1,0 +1,138 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.info-page {
+  background: $color-white;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+// ─── Hero Section ───
+.info-hero {
+  width: 100%;
+  max-width: 1700px;
+  height: 554px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative; // Needed for the absolute image and overlay
+  color: $color-white;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  // Dark overlay for text readability
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 2;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 3; // Above image and overlay
+    padding: 0 20px;
+  }
+
+  &__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.4;
+    max-width: 426px;
+    margin: 0 auto;
+    color: rgba(233, 233, 237, 1);
+  }
+}
+
+// ─── Four-Column Grid ───
+.info-grid__wrapper {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 130px 40px;
+
+  @include mobile {
+    padding: 60px 20px;
+  }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  justify-items: center;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 40px;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 244px;
+  cursor: default;
+
+  &__icon {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img, svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    color: #000;
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.4;
+    color: rgba(0, 0, 0, 0.75);
+  }
+}

@@ -1,15 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 // PRODUCT DETAILS PAGE
 // ═══════════════════════════════════════════════════════════
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import { getCart, addToCart, updateCartBadges } from './cart.js';
 // ─── State ────────────────────────────────────────────────
 let currentProduct = null;
@@ -22,38 +13,36 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartBadges(getCart().length);
     void init();
 });
-function init() {
-    return __awaiter(this, void 0, void 0, function* () {
-        var _a;
-        const id = getProductIdFromUrl();
-        try {
-            const res = yield fetch('../assets/data.json');
-            const json = (yield res.json());
-            const all = json.data;
-            const product = id ? all.find(p => p.id === id) : null;
-            if (product) {
-                currentProduct = product;
-                renderProduct(product);
-                renderAlsoLike(all, product.id);
-            }
-            else {
-                // Fallback: show first product
-                currentProduct = (_a = all[0]) !== null && _a !== void 0 ? _a : null;
-                if (currentProduct) {
-                    renderProduct(currentProduct);
-                    renderAlsoLike(all, currentProduct.id);
-                }
-            }
-            initQuantity();
-            initAddToCart();
-            initTabs();
-            initReviewForm();
-            initStarRating();
+async function init() {
+    var _a;
+    const id = getProductIdFromUrl();
+    try {
+        const res = await fetch('../assets/data.json');
+        const json = (await res.json());
+        const all = json.data;
+        const product = id ? all.find(p => p.id === id) : null;
+        if (product) {
+            currentProduct = product;
+            renderProduct(product);
+            renderAlsoLike(all, product.id);
         }
-        catch (err) {
-            console.error('Product page: failed to load data', err);
+        else {
+            // Fallback: show first product
+            currentProduct = (_a = all[0]) !== null && _a !== void 0 ? _a : null;
+            if (currentProduct) {
+                renderProduct(currentProduct);
+                renderAlsoLike(all, currentProduct.id);
+            }
         }
-    });
+        initQuantity();
+        initAddToCart();
+        initTabs();
+        initReviewForm();
+        initStarRating();
+    }
+    catch (err) {
+        console.error('Product page: failed to load data', err);
+    }
 }
 // ─── Get ?id= from URL ────────────────────────────────────
 function getProductIdFromUrl() {

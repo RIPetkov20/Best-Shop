@@ -2,6 +2,8 @@
 // MAIN  –  loads header + footer partials, then inits UI
 // ═══════════════════════════════════════════════════════════
 
+import { initLoginModal } from './loginModal.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Load both partials in parallel, then init all UI features
   void Promise.all([loadPartial('header'), loadPartial('footer')]).then(() => {
@@ -9,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setActiveNavLink();
     initCartCounter();
     initAccountModal();
+    initLoginModal();
   });
 });
 
