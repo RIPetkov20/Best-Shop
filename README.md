@@ -1,5 +1,5 @@
-# 61 out of 64 points from the checklist
-# Suitcase E-Shop – Multi-Page Web Application
+# Suitcase E-Shop – Multi-Page Web Application 
+# Capstone project for completion of EPAM Front-End Fundamentals Program 
 
 ## 📌 Project Overview
 
@@ -197,9 +197,4 @@ src/assets/data.json
 * The project follows the provided Figma design (not pixel-perfect).
 * No external frameworks (React, Angular, Bootstrap) are used.
 * Code is organized, reusable, and maintainable.
-
 ---
-
-## 📌 Author
-
-Rumen Petkov
